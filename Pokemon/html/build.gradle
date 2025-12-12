@@ -34,12 +34,13 @@ gwt {
 
 dependencies {
   implementation "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-  implementation "com.crashinvaders.lml:gdx-autumn-gwt:$lmlVersion"
-  implementation "com.crashinvaders.lml:gdx-autumn-gwt:$lmlVersion:sources"
-  implementation "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion:sources"
+
   implementation "com.github.tommyettinger:gdx-backend-gwt:1.1210.1"
   implementation "com.github.tommyettinger:gdx-backend-gwt:1.1210.1:sources"
   implementation "com.google.jsinterop:jsinterop-annotations:2.0.2:sources"
+  implementation "com.crashinvaders.lml:gdx-autumn-gwt:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-autumn-gwt:$lmlVersion:sources"
+  implementation "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion:sources"
   implementation project(':core')
 }
 
@@ -159,8 +160,8 @@ tasks.compileGwt.dependsOn("addSource")
 tasks.draftCompileGwt.dependsOn("addSource")
 tasks.checkGwt.dependsOn("addSource")
 
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 sourceSets.main.java.srcDirs = [ "src/main/java/" ]
 
 eclipse.project.name = appName + "-html"

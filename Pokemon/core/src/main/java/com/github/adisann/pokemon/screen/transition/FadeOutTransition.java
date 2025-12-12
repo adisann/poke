@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.transition;
+﻿package com.github.adisann.pokemon.screen.transition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class FadeOutTransition extends Transition {
 	
 	private Color color;

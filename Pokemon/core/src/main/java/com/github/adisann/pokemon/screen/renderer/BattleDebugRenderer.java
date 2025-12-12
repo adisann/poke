@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.renderer;
+﻿package com.github.adisann.pokemon.screen.renderer;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 /**
  * Debug rendering on top of the BattleRenderer. This has access to all the features of the BattleRenderer.
- * 
- * @author hydrozoa
- */
+ * */
 public class BattleDebugRenderer {
 	
 	private BattleRenderer battleRenderer;
@@ -36,5 +34,3 @@ public class BattleDebugRenderer {
 	}
 
 }
-
-

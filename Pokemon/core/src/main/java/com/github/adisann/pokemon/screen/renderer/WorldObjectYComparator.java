@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.renderer;
+﻿package com.github.adisann.pokemon.screen.renderer;
 
 import java.util.Comparator;
 
@@ -6,9 +6,7 @@ import com.github.adisann.pokemon.model.YSortable;
 
 /**
  * Used for sorting objects by their Y-coord during rendering.
- * 
- * @author hydrozoa
- */
+ * */
 public class WorldObjectYComparator implements Comparator<YSortable> {
 
 	@Override
@@ -21,5 +19,3 @@ public class WorldObjectYComparator implements Comparator<YSortable> {
 		return 0;
 	}
 }
-
-

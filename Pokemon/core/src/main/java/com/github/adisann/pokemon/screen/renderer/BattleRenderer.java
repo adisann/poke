@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.renderer;
+﻿package com.github.adisann.pokemon.screen.renderer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -18,9 +18,7 @@ import com.github.adisann.pokemon.battle.animation.BattleSprite;
  * 
  * Requires you to {@link #setPokemonSprite(TextureRegion, BATTLE_PARTY)} 
  * for both BATTLE_TURN.PLAYER and BATTLE_TURN.OPPONENT first.
- * 
- * @author hydrozoa
- */
+ * */
 public class BattleRenderer {
 	
 	/* Size of half of a square around pokemon, defining local coords */
@@ -59,10 +57,10 @@ public class BattleRenderer {
 	/**
 	 * Renders the two specified pokemon in battle.
 	 * @param batch			Used to render the scene
-	 * @param animation		Animation  in progress
+	 * @param animation		Animation in progress
 	 * @param primarilyAnimated			Party primarily involved with the animation
 	 */
-	public void render(SpriteBatch batch, BattleAnimation  animation, BATTLE_PARTY primarilyAnimated) {
+	public void render(SpriteBatch batch, BattleAnimation animation, BATTLE_PARTY primarilyAnimated) {
 		// recalc the player's square's middle
 		playerSquareMiddleX = Gdx.graphics.getWidth()/2 - squareSize;
 		playerSquareMiddleY = Gdx.graphics.getHeight()/2;
@@ -96,7 +94,7 @@ public class BattleRenderer {
 			opponentY = platformYOrigin;
 		}
 		
-		if (Animation  != null) {
+		if (animation != null) {
 			if (primarilyAnimated == BATTLE_PARTY.PLAYER) {
 				playerWidth = animation.getPrimaryWidth();
 				playerHeight = animation.getPrimaryHeight();
@@ -154,7 +152,7 @@ public class BattleRenderer {
 		/* render both pokemon looking at eachother */
 		if (playerPokemon != null) {
 			batch.setColor(1f, 1f, 1f, playerAlpha);
-			if (Animation  != null && animation.getPrimaryMask() != null && !animation.isFinished()) {
+			if (animation != null && animation.getPrimaryMask() != null && !animation.isFinished()) {
 				this.renderWithMask(
 						batch, 
 						pokemonTexture, 
@@ -199,7 +197,7 @@ public class BattleRenderer {
 		batch.setColor(1f, 1f, 1f, 1f);
 		
 		/* render battle sprites */
-		if (Animation  != null && !animation.isFinished()) {
+		if (animation != null && !animation.isFinished()) {
 			for (BattleSprite sprite : animation.getSprites()) {
 				batch.setColor(1f, 1f, 1f, sprite.getAlpha());
 				float spriteX = 0f;
@@ -283,5 +281,3 @@ public class BattleRenderer {
 		return opponentSquareMiddleY;
 	}
 }
-
-

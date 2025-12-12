@@ -1,13 +1,11 @@
-package com.github.adisann.pokemon.screen.transition;
+﻿package com.github.adisann.pokemon.screen.transition;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
+/** */
 public abstract class Transition {
 	
 	private float timer;

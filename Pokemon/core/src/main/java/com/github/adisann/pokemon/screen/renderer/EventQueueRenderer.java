@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.renderer;
+﻿package com.github.adisann.pokemon.screen.renderer;
 
 import java.util.Queue;
 
@@ -10,9 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 /**
  * Offers visuals for any Queue.
- * 
- * @author hydrozoa
- */
+ * */
 public class EventQueueRenderer {
 	
 	private float boxHeight = 30;
@@ -55,5 +53,3 @@ public class EventQueueRenderer {
 		font.draw(batch, text, (textWidth+10)/2-textWidth/2, boxHeight/2+textHeight/2+y);
 	}
 }
-
-

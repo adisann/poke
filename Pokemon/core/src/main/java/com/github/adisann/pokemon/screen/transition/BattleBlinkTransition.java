@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.screen.transition;
+﻿package com.github.adisann.pokemon.screen.transition;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -11,9 +11,7 @@ import aurelienribon.tweenengine.TweenManager;
 
 /**
  * Two short blinks and a special effect.
- * 
- * @author hydrozoa
- */
+ * */
 public class BattleBlinkTransition extends BattleTransition {
 	
 	/* progression (0f-1f) - not seconds! */

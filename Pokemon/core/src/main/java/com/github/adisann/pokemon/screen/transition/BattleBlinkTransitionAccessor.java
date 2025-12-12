@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.screen.transition;
+﻿package com.github.adisann.pokemon.screen.transition;
 
 import aurelienribon.tweenengine.TweenAccessor;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class BattleBlinkTransitionAccessor implements TweenAccessor<BattleBlinkTransition> {
 	
 	public static final int ALPHA = 0;

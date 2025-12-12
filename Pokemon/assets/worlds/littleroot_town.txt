@@ -6,6 +6,13 @@ setTerrain		7	13	GRASS_DIRTPATCH
 setTerrain		9	5	GRASS_DIRTPATCH
 setTerrain		16	13	GRASS_DIRTPATCH
 
+setTerrain		6	15	TALL_GRASS
+setTerrain		7	15	TALL_GRASS
+setTerrain		8	15	TALL_GRASS
+setTerrain		6	16	TALL_GRASS
+setTerrain		7	16	TALL_GRASS
+setTerrain		8	16	TALL_GRASS
+
 addTree			0	0
 addTree			2	2
 addTree			2	0

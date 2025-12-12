@@ -5,6 +5,9 @@
 	<terrain name="GRASS">
 		<imageName>grass</imageName>
 	</terrain>
+	<terrain name="TALL_GRASS">
+		<imageName>grass1</imageName>
+	</terrain>
 	<terrain name="GRASS_DIRTPATCH">
 		<imageName>grass_dirtpatch</imageName>
 	</terrain>

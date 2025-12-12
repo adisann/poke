@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.controller;
+﻿package com.github.adisann.pokemon.controller;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -12,9 +12,7 @@ import com.github.adisann.pokemon.ui.OptionBox;
 
 /**
  * Controller for the game's dialogue system.
- * 
- * @author hydrozoa
- */
+ * */
 public class DialogueController extends InputAdapter {
 	
 	private DialogueTraverser traverser;
@@ -123,5 +121,3 @@ public class DialogueController extends InputAdapter {
 		return dialogueBox.isVisible();
 	}
 }
-
-

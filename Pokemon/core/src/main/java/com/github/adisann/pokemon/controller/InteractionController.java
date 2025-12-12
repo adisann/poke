@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.controller;
+﻿package com.github.adisann.pokemon.controller;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
@@ -9,9 +9,7 @@ import com.github.adisann.pokemon.model.actor.Actor;
 
 /**
  * Controller that interacts with what is in front of the player Actor.
- * 
- * @author hydrozoa
- */
+ * */
 public class InteractionController extends InputAdapter {
 	
 	private Actor a;
@@ -41,5 +39,3 @@ public class InteractionController extends InputAdapter {
 	}
 
 }
-
-

@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.controller;
+﻿package com.github.adisann.pokemon.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,7 @@ import com.github.adisann.pokemon.util.Action;
 
 /**
  * Controller that can be coupled to a OptionBox, coupling each option with code for execution.
- * 
- * @author Hydrozoa
- */
+ * */
 public class OptionBoxController extends InputAdapter {
 	
 	private OptionBox box;
@@ -74,5 +72,3 @@ public class OptionBoxController extends InputAdapter {
 		actions.add(a);
 	}
 }
-
-

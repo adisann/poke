@@ -1,13 +1,11 @@
-package com.github.adisann.pokemon.ui;
+﻿package com.github.adisann.pokemon.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class DialogueBox extends Table {
 	
 	private String targetText = "";
@@ -77,5 +75,3 @@ public class DialogueBox extends Table {
 		return 200f;
 	}
 }
-
-

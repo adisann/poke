@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.ui;
+﻿package com.github.adisann.pokemon.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;
@@ -10,9 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 /**
  * Widget that displays HP.
- * 
- * @author hydrozoa
- */
+ * */
 public class HPBar extends Widget {
 	
 	private enum STATE {
@@ -103,5 +101,3 @@ public class HPBar extends Widget {
 		hpAmount = MathUtils.clamp(hpAmount, 0f, 1f);
 	}
 }
-
-

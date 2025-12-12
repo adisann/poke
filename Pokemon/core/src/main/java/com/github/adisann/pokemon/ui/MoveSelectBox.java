@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.ui;
+﻿package com.github.adisann.pokemon.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,9 +11,7 @@ import com.badlogic.gdx.utils.Scaling;
  * This selection box has four labels, enumerated like so:
  * 		0	1
  * 		2	3
- * 
- * @author hydrozoa
- */
+ * */
 public class MoveSelectBox extends Table {
 	
 	private int selectorIndex = 0;
@@ -143,5 +141,3 @@ public class MoveSelectBox extends Table {
 		}
 	}
 }
-
-

@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon;
+﻿package com.github.adisann.pokemon;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class Settings {
 	
 	public static int TILE_SIZE = 16;

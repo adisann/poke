@@ -5,9 +5,10 @@ dependencies {
   api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
   api 'com.github.arcnor:universal-tween-engine:6.3.4'
-  api "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion"
-  api "com.crashinvaders.lml:gdx-autumn:$lmlVersion"
-  api "com.crashinvaders.lml:gdx-kiwi:$lmlVersion"
-  api "com.crashinvaders.lml:gdx-lml:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-autumn:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-kiwi:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-lml:$lmlVersion"
+
   api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
 }

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.moves;
+package com.github.adisann.pokemon.battle.moves;
 
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
 import com.github.adisann.pokemon.battle.BattleMechanics;

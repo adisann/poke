@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.event;
+package com.github.adisann.pokemon.battle.event;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;

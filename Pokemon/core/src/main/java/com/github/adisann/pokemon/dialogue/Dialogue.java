@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.dialogue;
+package com.github.adisann.pokemon.dialogue;
 
 import java.util.HashMap;
 import java.util.Map;

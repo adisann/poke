@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.animation;
+package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;

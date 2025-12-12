@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.world;
+package com.github.adisann.pokemon.model.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;

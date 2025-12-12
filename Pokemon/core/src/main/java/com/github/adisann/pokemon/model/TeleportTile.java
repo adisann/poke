@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model;
+package com.github.adisann.pokemon.model;
 
 import com.badlogic.gdx.graphics.Color;
 import com.github.adisann.pokemon.model.actor.Actor;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.worldloader;
+package com.github.adisann.pokemon.worldloader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

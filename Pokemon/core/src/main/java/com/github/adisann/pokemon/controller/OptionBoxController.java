@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.controller;
+package com.github.adisann.pokemon.controller;
 
 import java.util.ArrayList;
 import java.util.List;

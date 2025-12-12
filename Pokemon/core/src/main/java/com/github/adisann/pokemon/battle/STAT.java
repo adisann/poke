@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle;
+package com.github.adisann.pokemon.battle;
 
 /**
  * Elements that determine certain aspects on battles.

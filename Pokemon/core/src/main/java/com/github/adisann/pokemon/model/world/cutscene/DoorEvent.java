@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.world.cutscene;
+package com.github.adisann.pokemon.model.world.cutscene;
 
 import com.github.adisann.pokemon.model.world.Door;
 import com.github.adisann.pokemon.model.world.Door.STATE;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.ai;
+package com.github.adisann.pokemon.battle.ai;
 
 import com.github.adisann.pokemon.model.Pokemon;
 

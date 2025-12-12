@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model;
+package com.github.adisann.pokemon.model;
 
 /** */
 public class TileMap {

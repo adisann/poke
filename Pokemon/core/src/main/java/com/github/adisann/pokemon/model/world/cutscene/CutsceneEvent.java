@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.world.cutscene;
+package com.github.adisann.pokemon.model.world.cutscene;
 
 /**
  * Analog to a BattleEvent.

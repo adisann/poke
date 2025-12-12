@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.ui;
+package com.github.adisann.pokemon.ui;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Interpolation;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.screen;
+package com.github.adisann.pokemon.screen;
 
 import com.badlogic.gdx.Screen;
 import com.github.adisann.pokemon.PokemonGame;

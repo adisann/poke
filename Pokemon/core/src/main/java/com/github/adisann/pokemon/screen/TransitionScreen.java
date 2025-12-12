@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.screen;
+package com.github.adisann.pokemon.screen;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;

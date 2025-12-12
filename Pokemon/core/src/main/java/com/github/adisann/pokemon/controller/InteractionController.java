@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.controller;
+package com.github.adisann.pokemon.controller;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;

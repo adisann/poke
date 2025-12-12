@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.util;
+package com.github.adisann.pokemon.util;
 
 /**
  * Contains a single method. 

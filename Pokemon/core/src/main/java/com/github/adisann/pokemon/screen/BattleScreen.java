@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.screen;
+package com.github.adisann.pokemon.screen;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.world.cutscene;
+package com.github.adisann.pokemon.model.world.cutscene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.github.adisann.pokemon.model.DIRECTION;

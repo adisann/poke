@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.actor;
+package com.github.adisann.pokemon.model.actor;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.github.adisann.pokemon.model.world.World;

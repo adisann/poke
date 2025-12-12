@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.moves;
+package com.github.adisann.pokemon.battle.moves;
 
 import java.lang.reflect.InvocationTargetException;
 

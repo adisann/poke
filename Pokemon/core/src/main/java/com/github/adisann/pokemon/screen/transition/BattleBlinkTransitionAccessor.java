@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.screen.transition;
+package com.github.adisann.pokemon.screen.transition;
 
 import aurelienribon.tweenengine.TweenAccessor;
 

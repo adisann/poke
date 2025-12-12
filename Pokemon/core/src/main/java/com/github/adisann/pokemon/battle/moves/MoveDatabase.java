@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.moves;
+package com.github.adisann.pokemon.battle.moves;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle;
+package com.github.adisann.pokemon.battle;
 
 import java.util.ArrayList;
 import java.util.List;

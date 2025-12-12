@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.screen.renderer;
+package com.github.adisann.pokemon.screen.renderer;
 
 import java.util.Queue;
 

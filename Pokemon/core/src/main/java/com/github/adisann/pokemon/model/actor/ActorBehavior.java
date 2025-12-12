@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.model.actor;
+package com.github.adisann.pokemon.model.actor;
 
 /** */
 public abstract class ActorBehavior {

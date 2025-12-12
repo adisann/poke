@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon;
+package com.github.adisann.pokemon;
 
 /** */
 public class Settings {

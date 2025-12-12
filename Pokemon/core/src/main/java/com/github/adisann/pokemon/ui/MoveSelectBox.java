@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.ui;
+package com.github.adisann.pokemon.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;

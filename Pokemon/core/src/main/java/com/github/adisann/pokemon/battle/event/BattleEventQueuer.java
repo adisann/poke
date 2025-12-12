@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.event;
+package com.github.adisann.pokemon.battle.event;
 
 /** */
 public interface BattleEventQueuer {

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle;
+package com.github.adisann.pokemon.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.github.adisann.pokemon.battle.moves.MOVE_CATEGORY;

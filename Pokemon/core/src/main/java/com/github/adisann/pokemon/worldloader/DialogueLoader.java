@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.worldloader;
+package com.github.adisann.pokemon.worldloader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;

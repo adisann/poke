@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.util;
+package com.github.adisann.pokemon.util;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;

@@ -1,4 +1,4 @@
-﻿package com.github.adisann.pokemon.battle.animation;
+package com.github.adisann.pokemon.battle.animation;
 
 import aurelienribon.tweenengine.TweenAccessor;
 

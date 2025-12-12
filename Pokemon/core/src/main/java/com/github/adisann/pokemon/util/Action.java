@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.util;
+﻿package com.github.adisann.pokemon.util;
 
 /**
  * Contains a single method. 
@@ -7,13 +7,9 @@ package com.github.adisann.pokemon.util;
  * about what's going to happen during a transition.
  * 
  * Also used to attach execution to UI elements.
- * 
- * @author hydrozoa
- */
+ * */
 public interface Action {
 
 	public void action();
 	
 }
-
-

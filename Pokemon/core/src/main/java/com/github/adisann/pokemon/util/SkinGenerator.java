@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.util;
+﻿package com.github.adisann.pokemon.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -15,9 +15,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 
 /**
  * Generates a Skin to slam on the UI. 
- * 
- * @author hydrozoa
- */
+ * */
 public class SkinGenerator {
 	
 	public static Skin generateSkin(AssetManager assetManager) {
@@ -76,5 +74,3 @@ public class SkinGenerator {
 	}
 
 }
-
-

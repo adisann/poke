@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.util;
+﻿package com.github.adisann.pokemon.util;
 
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class TexturePackerTool {
 	
 	public static void main(String[] args) {
@@ -23,5 +21,3 @@ public class TexturePackerTool {
 	}
 
 }
-
-

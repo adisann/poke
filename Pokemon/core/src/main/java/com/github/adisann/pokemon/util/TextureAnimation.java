@@ -1,15 +1,13 @@
-package com.github.adisann.pokemon.util;
+﻿package com.github.adisann.pokemon.util;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Copy of Animation  that allows for Textures to be used in Animations.
- * 
- * @author hydrozoa
- */
-public class TextureAnimation  {
+ * Copy of Animation that allows for Textures to be used in Animations.
+ * */
+public class TextureAnimation {
 
 	/** Defines possible playback modes for an {@link Animation}. */
 	public enum PlayMode {
@@ -48,7 +46,7 @@ public class TextureAnimation  {
 	 * 
 	 * @param frameDuration the time between frames in seconds.
 	 * @param keyFrames the {@link TextureRegion}s representing the frames.
-	 * @param playMode the Animation  playback mode. */
+	 * @param playMode the animation playback mode. */
 	public TextureAnimation(float frameDuration, Array<? extends Texture> keyFrames, PlayMode playMode) {
 
 		this.frameDuration = frameDuration;
@@ -73,12 +71,12 @@ public class TextureAnimation  {
 	}
 
 	/** Returns a {@link TextureRegion} based on the so called state time. This is the amount of seconds an object has spent in the
-	 * state this Animation  instance represents, e.g. running, jumping and so on. The mode specifies whether the Animation  is
+	 * state this Animation instance represents, e.g. running, jumping and so on. The mode specifies whether the animation is
 	 * looping or not.
 	 * 
 	 * @param stateTime the time spent in the state represented by this animation.
-	 * @param looping whether the Animation  is looping or not.
-	 * @return the TextureRegion representing the frame of Animation  for the given state time. */
+	 * @param looping whether the animation is looping or not.
+	 * @return the TextureRegion representing the frame of animation for the given state time. */
 	public Texture getKeyFrame (float stateTime, boolean looping) {
 		// we set the play mode by overriding the previous mode based on looping
 		// parameter value
@@ -101,11 +99,11 @@ public class TextureAnimation  {
 	}
 
 	/** Returns a {@link TextureRegion} based on the so called state time. This is the amount of seconds an object has spent in the
-	 * state this Animation  instance represents, e.g. running, jumping and so on using the mode specified by
+	 * state this Animation instance represents, e.g. running, jumping and so on using the mode specified by
 	 * {@link #setPlayMode(PlayMode)} method.
 	 * 
 	 * @param stateTime
-	 * @return the TextureRegion representing the frame of Animation  for the given state time. */
+	 * @return the TextureRegion representing the frame of animation for the given state time. */
 	public Texture getKeyFrame (float stateTime) {
 		int frameNumber = getKeyFrameIndex(stateTime);
 		return keyFrames[frameNumber];
@@ -152,27 +150,27 @@ public class TextureAnimation  {
 		return frameNumber;
 	}
 
-	/** Returns the keyFrames[] array where all the TextureRegions of the Animation  are stored.
+	/** Returns the keyFrames[] array where all the TextureRegions of the animation are stored.
 	 * @return keyFrames[] field */
 	public Texture[] getKeyFrames () {
 		return keyFrames;
 	}
 
-	/** Returns the Animation  play mode. */
+	/** Returns the animation play mode. */
 	public PlayMode getPlayMode () {
 		return playMode;
 	}
 
-	/** Sets the Animation  play mode.
+	/** Sets the animation play mode.
 	 * 
-	 * @param playMode The Animation  {@link PlayMode} to use. */
+	 * @param playMode The animation {@link PlayMode} to use. */
 	public void setPlayMode (PlayMode playMode) {
 		this.playMode = playMode;
 	}
 
-	/** Whether the Animation  would be finished if played without looping (PlayMode#NORMAL), given the state time.
+	/** Whether the animation would be finished if played without looping (PlayMode#NORMAL), given the state time.
 	 * @param stateTime
-	 * @return whether the Animation  is finished. */
+	 * @return whether the animation is finished. */
 	public boolean isAnimationFinished (float stateTime) {
 		int frameNumber = (int)(stateTime / frameDuration);
 		return keyFrames.length - 1 < frameNumber;
@@ -195,5 +193,3 @@ public class TextureAnimation  {
 		return animationDuration;
 	}
 }
-
-

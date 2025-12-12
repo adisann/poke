@@ -1,11 +1,9 @@
-package com.github.adisann.pokemon.worldloader;
+﻿package com.github.adisann.pokemon.worldloader;
 
 import java.util.HashMap;
 
 /**
- * Database of all gameobjects. These can be referenced when making maps to easily import objects into the world. 
- * @author Hydrozoa
- */
+ * Database of all gameobjects. These can be referenced when making maps to easily import objects into the world. */
 public class LWorldObjectDb {
 	
 	private HashMap<String,LWorldObject> knownObjects = new HashMap<String,LWorldObject>();
@@ -22,5 +20,3 @@ public class LWorldObjectDb {
 	}
 
 }
-
-

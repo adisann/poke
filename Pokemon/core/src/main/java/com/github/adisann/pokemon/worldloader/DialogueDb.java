@@ -1,12 +1,10 @@
-package com.github.adisann.pokemon.worldloader;
+﻿package com.github.adisann.pokemon.worldloader;
 
 import java.util.HashMap;
 
 import com.github.adisann.pokemon.dialogue.Dialogue;
 
-/**
- * @author Hydrozoa
- */
+/** */
 public class DialogueDb {
 	
 	private HashMap<String, Dialogue> knownDialogue = new HashMap<String, Dialogue>();
@@ -23,5 +21,3 @@ public class DialogueDb {
 	}
 
 }
-
-

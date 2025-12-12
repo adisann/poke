@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.dialogue;
+﻿package com.github.adisann.pokemon.dialogue;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class DialogueTraverser {
 	
 	private Dialogue dialogue;
@@ -26,5 +24,3 @@ public class DialogueTraverser {
 		return currentNode;
 	}
 }
-
-

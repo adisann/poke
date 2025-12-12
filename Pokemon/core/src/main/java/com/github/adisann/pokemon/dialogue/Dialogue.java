@@ -1,11 +1,9 @@
-package com.github.adisann.pokemon.dialogue;
+﻿package com.github.adisann.pokemon.dialogue;
 
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class Dialogue {
 	
 	private Map<Integer, DialogueNode> nodes = new HashMap<Integer, DialogueNode>();
@@ -29,5 +27,3 @@ public class Dialogue {
 		return nodes.size();
 	}
 }
-
-

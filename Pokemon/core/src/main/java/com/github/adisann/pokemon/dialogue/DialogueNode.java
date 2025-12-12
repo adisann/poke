@@ -9,5 +9,3 @@ public interface DialogueNode {
 	public List<Integer> getPointers();
 	
 }
-
-

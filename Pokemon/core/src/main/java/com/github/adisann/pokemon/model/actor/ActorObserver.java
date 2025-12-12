@@ -24,5 +24,3 @@ public interface ActorObserver {
 	public void actorBeforeMoved(Actor a, DIRECTION direction);
 
 }
-
-

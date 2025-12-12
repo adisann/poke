@@ -1,12 +1,10 @@
-package com.github.adisann.pokemon.model;
+﻿package com.github.adisann.pokemon.model;
 
 import com.github.adisann.pokemon.model.actor.Actor;
 import com.github.adisann.pokemon.model.world.WorldObject;
 import com.github.adisann.pokemon.worldloader.LTerrain;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class Tile {
 	
 	private LTerrain terrain;
@@ -62,5 +60,3 @@ public class Tile {
 		return true;
 	}
 }
-
-

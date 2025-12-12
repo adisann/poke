@@ -1,16 +1,14 @@
-package com.github.adisann.pokemon.model.world;
+﻿package com.github.adisann.pokemon.model.world;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.GridPoint2;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class Door extends WorldObject {
 	
-	private Animation  openAnimation;
-	private Animation  closeAnimation;
+	private Animation<TextureRegion> openAnimation;
+	private Animation<TextureRegion> closeAnimation;
 	
 	private float animationTimer = 0f;
 	private float animationTime = 0.5f;
@@ -25,10 +23,10 @@ public class Door extends WorldObject {
 		;
 	}
 
-	public Door(int x, int y, Animation  openAnimation, Animation  closeAnimation) {
+	public Door(int x, int y, Animation<TextureRegion> openAnimation, Animation<TextureRegion> closeAnimation) {
 		super(x, y, true, openAnimation.getKeyFrames()[0], 1f, 1.5f, new GridPoint2(0,0));
-		this.openAnimation  = openAnimation;
-		this.closeAnimation  = closeAnimation;
+		this.openAnimation = openAnimation;
+		this.closeAnimation = closeAnimation;
 	}
 	
 	public void open() {
@@ -74,5 +72,3 @@ public class Door extends WorldObject {
 	}
 
 }
-
-

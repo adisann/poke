@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.model.world;
+﻿package com.github.adisann.pokemon.model.world;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,7 @@ import com.github.adisann.pokemon.model.YSortable;
 
 /**
  * Object in the world. This can be a sign, a tree or some flowers.
- * 
- * @author hydrozoa
- */
+ * */
 public class WorldObject implements YSortable {
 	
 	private float sizeX, sizeY;
@@ -22,7 +20,7 @@ public class WorldObject implements YSortable {
 	
 	private TextureRegion texture;
 	
-	private Animation  animation;
+	private Animation<TextureRegion> animation;
 	private float animationTimer;
 	
 	public WorldObject(int x, int y, TextureRegion texture, float sizeX, float sizeY, GridPoint2[] tiles) {
@@ -62,10 +60,10 @@ public class WorldObject implements YSortable {
 		this.walkable = walkable;
 	}
 	
-	public WorldObject(int x, int y, boolean walkable, Animation  animation, float sizeX, float sizeY, GridPoint2[] tiles) {
+	public WorldObject(int x, int y, boolean walkable, Animation<TextureRegion> animation, float sizeX, float sizeY, GridPoint2[] tiles) {
 		this.x = x;
 		this.y = y;
-		this.Animation  = animation;
+		this.animation = animation;
 		this.animationTimer = 0f;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
@@ -77,7 +75,7 @@ public class WorldObject implements YSortable {
 	}
 	
 	public void update(float delta) {
-		if (Animation  != null) {
+		if (animation != null) {
 			animationTimer += delta;
 		}
 	}
@@ -140,5 +138,3 @@ public class WorldObject implements YSortable {
 	}
 
 }
-
-

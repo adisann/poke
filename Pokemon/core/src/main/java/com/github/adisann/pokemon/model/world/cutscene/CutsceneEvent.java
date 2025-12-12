@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.model.world.cutscene;
+﻿package com.github.adisann.pokemon.model.world.cutscene;
 
 /**
  * Analog to a BattleEvent.
- * 
- * @author hydrozoa
- */
+ * */
 public abstract class CutsceneEvent {
 	
 	private CutscenePlayer player;
@@ -27,5 +25,3 @@ public abstract class CutsceneEvent {
 	public abstract void screenShow();
 
 }
-
-

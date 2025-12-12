@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.model.actor;
+﻿package com.github.adisann.pokemon.model.actor;
 
-/**
- * @author hydrozoa
- */
+/** */
 public abstract class ActorBehavior {
 	
 	private Actor actor;
@@ -22,5 +20,3 @@ public abstract class ActorBehavior {
 	}
 
 }
-
-

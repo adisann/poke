@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.model;
+﻿package com.github.adisann.pokemon.model;
 
-/**
- * @author hydrozoa
- */
+/** */
 public enum DIRECTION {
 	
 	NORTH(0,1),
@@ -41,5 +39,3 @@ public enum DIRECTION {
 	}
 
 }
-
-

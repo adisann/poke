@@ -1,11 +1,9 @@
-package com.github.adisann.pokemon.model.world.cutscene;
+﻿package com.github.adisann.pokemon.model.world.cutscene;
 
 import com.github.adisann.pokemon.model.world.Door;
 import com.github.adisann.pokemon.model.world.Door.STATE;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class DoorEvent extends CutsceneEvent {
 	
 	private boolean opening;
@@ -47,5 +45,3 @@ public class DoorEvent extends CutsceneEvent {
 	public void screenShow() {}
 
 }
-
-

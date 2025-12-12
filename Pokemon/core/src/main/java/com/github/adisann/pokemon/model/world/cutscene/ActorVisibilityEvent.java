@@ -34,5 +34,3 @@ public class ActorVisibilityEvent extends CutsceneEvent {
 	public void screenShow() {}
 
 }
-
-

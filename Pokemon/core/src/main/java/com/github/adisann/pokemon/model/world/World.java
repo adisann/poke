@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.model.world;
+﻿package com.github.adisann.pokemon.model.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,14 +14,12 @@ import com.github.adisann.pokemon.model.actor.ActorObserver;
 /**
  * Contains data about the game world, such as references to Actors, and WorldObjects.
  * Query the world from here.
- * 
- * @author hydrozoa
- */
+ * */
 public class World implements ActorObserver {
 	
 	/** Unique name used to refer to this world */
 	private String name;
-	private int safeX;		// fly destination
+	private int safeX; // fly destination
 	private int safeY;
 	
 	private TileMap map;
@@ -30,10 +28,10 @@ public class World implements ActorObserver {
 	private List<WorldObject> objects;
 	
 	/**
-	 * @param name		Name of the world for internal model
-	 * @param width		Size of world in tiles
+	 * @param name Name of the world for internal model
+	 * @param width Size of world in tiles
 	 * @param height
-	 * @param safeX		Coord player can stand on, fly to
+	 * @param safeX Coord player can stand on, fly to
 	 * @param safeY
 	 */
 	public World(String name, int width, int height, int safeX, int safeY) {
@@ -73,7 +71,8 @@ public class World implements ActorObserver {
 	}
 	
 	public void update(float delta) {
-		for (Actor a : actors) {
+		for (int i = 0; i < actors.size(); i++) {
+			Actor a = actors.get(i);
 			if (brains.containsKey(a)) {
 				brains.get(a).update(delta);
 			}
@@ -123,5 +122,3 @@ public class World implements ActorObserver {
 		
 	}
 }
-
-

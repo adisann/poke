@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.model;
+﻿package com.github.adisann.pokemon.model;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class TileMap {
 	
 	private int width, height;
@@ -30,5 +28,3 @@ public class TileMap {
 		return height;
 	}
 }
-
-

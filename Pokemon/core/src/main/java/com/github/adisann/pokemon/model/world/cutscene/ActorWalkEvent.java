@@ -1,12 +1,10 @@
-package com.github.adisann.pokemon.model.world.cutscene;
+﻿package com.github.adisann.pokemon.model.world.cutscene;
 
 import com.github.adisann.pokemon.model.DIRECTION;
 import com.github.adisann.pokemon.model.actor.Actor;
 import com.github.adisann.pokemon.model.actor.Actor.MOVEMENT_STATE;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class ActorWalkEvent extends CutsceneEvent {
 	
 	private Actor a;
@@ -50,5 +48,3 @@ public class ActorWalkEvent extends CutsceneEvent {
 	public void screenShow() {}
 
 }
-
-

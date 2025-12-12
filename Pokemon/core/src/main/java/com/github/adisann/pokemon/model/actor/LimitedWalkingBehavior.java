@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.model.actor;
+﻿package com.github.adisann.pokemon.model.actor;
 
 import java.util.Random;
 
@@ -8,9 +8,7 @@ import com.github.adisann.pokemon.model.actor.Actor.MOVEMENT_STATE;
 
 /**
  * Behavior that will make an Actor walk around it's initial position randomly. 
- * 
- * @author hydrozoa
- */
+ * */
 public class LimitedWalkingBehavior extends ActorBehavior {
 	
 	private float moveIntervalMinimum;
@@ -67,5 +65,3 @@ public class LimitedWalkingBehavior extends ActorBehavior {
 		return random.nextFloat() * (moveIntervalMaximum - moveIntervalMinimum) + moveIntervalMinimum;
 	}
 }
-
-

@@ -1,12 +1,11 @@
-package com.github.adisann.pokemon.model.actor;
+﻿package com.github.adisann.pokemon.model.actor;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.github.adisann.pokemon.model.world.World;
 import com.github.adisann.pokemon.model.world.cutscene.CutscenePlayer;
 import com.github.adisann.pokemon.util.AnimationSet;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class PlayerActor extends Actor {
 	
 	private CutscenePlayer cutscenePlayer;
@@ -20,5 +19,3 @@ public class PlayerActor extends Actor {
 		return cutscenePlayer;
 	}
 }
-
-

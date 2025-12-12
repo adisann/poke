@@ -28,5 +28,3 @@ public class WaitEvent extends CutsceneEvent {
 	public void screenShow() {}
 
 }
-
-

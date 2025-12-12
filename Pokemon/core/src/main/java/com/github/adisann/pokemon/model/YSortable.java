@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.model;
+﻿package com.github.adisann.pokemon.model;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- * @author hydrozoa
- */
+/** */
 public interface YSortable {
 	
 	public float getWorldX();
@@ -17,5 +15,3 @@ public interface YSortable {
 	
 	public float getSizeY();
 }
-
-

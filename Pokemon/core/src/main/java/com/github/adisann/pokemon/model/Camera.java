@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.model;
+﻿package com.github.adisann.pokemon.model;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class Camera {
 	
 	private float cameraX = 0f;
@@ -21,5 +19,3 @@ public class Camera {
 		return cameraY;
 	}
 }
-
-

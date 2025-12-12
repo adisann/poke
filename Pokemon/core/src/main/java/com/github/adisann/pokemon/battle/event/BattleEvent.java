@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 /**
  * Any visual change in a Battle. These are queued up and displayed chonologically on the BattleScreen.
- * 
- * @author hydrozoa
- */
+ * */
 public abstract class BattleEvent {
 	
 	private BattleEventPlayer player;
@@ -21,5 +19,3 @@ public abstract class BattleEvent {
 		return player;
 	}
 }
-
-

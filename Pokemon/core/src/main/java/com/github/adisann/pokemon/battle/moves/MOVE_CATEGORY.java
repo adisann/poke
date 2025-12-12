@@ -5,5 +5,3 @@ public enum MOVE_CATEGORY {
 	SPECIAL,
 	;
 }
-
-

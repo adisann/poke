@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -6,9 +6,7 @@ import com.github.adisann.pokemon.ui.DialogueBox;
 
 /**
  * A BattleEvent where text is displayed in the BattleScreen's DialogueBox.
- * 
- * @author hydrozoa
- */
+ * */
 public class TextEvent extends BattleEvent {
 	
 	private boolean finished = false;

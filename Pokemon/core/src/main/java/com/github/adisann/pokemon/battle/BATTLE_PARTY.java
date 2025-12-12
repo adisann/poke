@@ -1,8 +1,6 @@
-package com.github.adisann.pokemon.battle;
+﻿package com.github.adisann.pokemon.battle;
 
-/**
- * @author hydrozoa
- */
+/** */
 public enum BATTLE_PARTY {
 	PLAYER,
 	OPPONENT,
@@ -19,5 +17,3 @@ public enum BATTLE_PARTY {
 		}
 	}
 }
-
-

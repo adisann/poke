@@ -1,12 +1,10 @@
-package com.github.adisann.pokemon.battle;
+﻿package com.github.adisann.pokemon.battle;
 
 import com.github.adisann.pokemon.battle.event.BattleEvent;
 
 /**
  * Objects can implement this interface and subscribe to a {@link Battle}.
- * 
- * @author hydrozoa
- */
+ * */
 public interface BattleObserver {
 	
 	/**
@@ -15,5 +13,3 @@ public interface BattleObserver {
 	 */
 	public void queueEvent(BattleEvent event);
 }
-
-

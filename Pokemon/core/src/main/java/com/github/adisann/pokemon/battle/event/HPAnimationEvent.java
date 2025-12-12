@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 import com.badlogic.gdx.math.Interpolation;
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
@@ -8,22 +8,20 @@ import com.github.adisann.pokemon.ui.StatusBox;
 
 /**
  * A BattleEvent where HP can be seen, depleting.
- * 
- * @author hydrozoa
- */
+ * */
 public class HPAnimationEvent extends BattleEvent {
-	
+
 	private BATTLE_PARTY party;
-	
+
 	private int hpBefore;
 	private int hpAfter;
 	private int hpTotal;
 	private float duration;
-	
+
 	private BattleEventPlayer eventPlayer;
 	private float timer;
 	private boolean finished;
-	
+
 	public HPAnimationEvent(BATTLE_PARTY party, int hpBefore, int hpAfter, int hpTotal, float duration) {
 		this.party = party;
 		this.hpBefore = hpBefore;
@@ -40,17 +38,17 @@ public class HPAnimationEvent extends BattleEvent {
 		if (timer > duration) {
 			finished = true;
 		}
-		
-		float progress = timer/duration;
-		float hpProgress = Interpolation.linear.apply(hpBefore, hpAfter, progress);
-		float hpProgressRelative = hpProgress/hpTotal;
-		
+
+		float progress = (duration > 0) ? timer / duration : 1f;
+		float hpProgress = Interpolation.linear.apply(hpBefore, hpAfter, Math.min(progress, 1f));
+		float hpProgressRelative = (hpTotal > 0) ? hpProgress / hpTotal : 0f;
+
 		HPBar hpbar = eventPlayer.getStatusBox(party).getHPBar();
 		hpbar.displayHPLeft(hpProgressRelative);
-		
+
 		StatusBox statusBox = eventPlayer.getStatusBox(party);
 		if (statusBox instanceof DetailedStatusBox) {
-			((DetailedStatusBox)statusBox).setHPText((int)hpProgress, hpTotal);
+			((DetailedStatusBox) statusBox).setHPText((int) hpProgress, hpTotal);
 		}
 	}
 
@@ -66,5 +64,3 @@ public class HPAnimationEvent extends BattleEvent {
 	}
 
 }
-
-

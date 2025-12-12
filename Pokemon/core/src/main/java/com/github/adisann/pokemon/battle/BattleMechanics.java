@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle;
+﻿package com.github.adisann.pokemon.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.github.adisann.pokemon.battle.moves.MOVE_CATEGORY;
@@ -9,9 +9,7 @@ import com.github.adisann.pokemon.model.Pokemon;
  * Contains methods useful for calculations during battle. 
  * 
  * Some say this is a ShoddyBattle tactic, and they're probably right.
- * 
- * @author hydrozoa
- */
+ * */
 public class BattleMechanics {
 	
 	private String message = "";
@@ -90,5 +88,3 @@ public class BattleMechanics {
 		return message;
 	}
 }
-
-

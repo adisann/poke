@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,9 +9,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Linear;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class StatChangeAnimation extends BattleAnimation {
 	
 	private TextureAnimation animation;
@@ -48,5 +46,3 @@ public class StatChangeAnimation extends BattleAnimation {
 		this.setPrimaryMask(animation.getKeyFrame(this.getTimer()));
 	}
 }
-
-

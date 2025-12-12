@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -7,10 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
-public class ChargeAnimation  extends BattleAnimation  {
+/** */
+public class ChargeAnimation extends BattleAnimation {
 	
 	private BattleSprite hitmark;
 
@@ -47,5 +45,3 @@ public class ChargeAnimation  extends BattleAnimation  {
 			.start(tweenManager);
 	}
 }
-
-

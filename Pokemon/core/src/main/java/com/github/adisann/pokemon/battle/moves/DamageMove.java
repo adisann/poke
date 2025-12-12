@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.moves;
+﻿package com.github.adisann.pokemon.battle.moves;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -16,9 +16,7 @@ import com.github.adisann.pokemon.model.Pokemon;
 
 /**
  * We're going to do some real important shit around here Morty.
- * 
- * @author hydrozoa
- */
+ * */
 public class DamageMove extends Move {
 
 	public DamageMove(MoveSpecification spec, Class<? extends BattleAnimation> clazz) {
@@ -26,7 +24,7 @@ public class DamageMove extends Move {
 	}
 
 	@Override
-	public BattleAnimation  animation() {
+	public BattleAnimation animation() {
 		try {
 			return animationClass.getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException	| NoSuchMethodException | SecurityException e) {
@@ -80,5 +78,3 @@ public class DamageMove extends Move {
 		return new DamageMove(spec, animationClass);
 	}
 }
-
-

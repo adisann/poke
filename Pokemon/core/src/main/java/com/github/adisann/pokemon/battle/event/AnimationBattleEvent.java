@@ -1,13 +1,11 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
 import com.github.adisann.pokemon.battle.animation.BattleAnimation;
 
 /**
- * A BattleEvent where a BattleAnimation  is played.
- * 
- * @author hydrozoa
- */
+ * A BattleEvent where a BattleAnimation is played.
+ * */
 public class AnimationBattleEvent extends BattleEvent {
 	
 	private BATTLE_PARTY primary;
@@ -35,5 +33,3 @@ public class AnimationBattleEvent extends BattleEvent {
 	}
 
 }
-
-

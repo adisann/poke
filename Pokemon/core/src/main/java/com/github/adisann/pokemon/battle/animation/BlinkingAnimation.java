@@ -1,14 +1,12 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
-public class BlinkingAnimation  extends BattleAnimation  {
+/** */
+public class BlinkingAnimation extends BattleAnimation {
 	
 	private int blinks;
 
@@ -40,5 +38,3 @@ public class BlinkingAnimation  extends BattleAnimation  {
 
 
 }
-
-

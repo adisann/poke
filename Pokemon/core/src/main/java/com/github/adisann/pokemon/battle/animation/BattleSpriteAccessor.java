@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import aurelienribon.tweenengine.TweenAccessor;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class BattleSpriteAccessor implements TweenAccessor<BattleSprite> {
 	
 	public static final int X = 0;
@@ -69,5 +67,3 @@ public class BattleSpriteAccessor implements TweenAccessor<BattleSprite> {
 	}
 
 }
-
-

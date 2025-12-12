@@ -1,14 +1,12 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
-public class FaintingAnimation  extends BattleAnimation  {
+/** */
+public class FaintingAnimation extends BattleAnimation {
 
 	public FaintingAnimation() {
 		super(0.3f);
@@ -27,5 +25,3 @@ public class FaintingAnimation  extends BattleAnimation  {
 	}
 
 }
-
-

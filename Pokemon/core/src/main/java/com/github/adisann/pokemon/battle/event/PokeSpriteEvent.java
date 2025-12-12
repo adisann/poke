@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
@@ -6,28 +6,26 @@ import com.github.adisann.pokemon.battle.BATTLE_PARTY;
 /**
  * A BattleEvent where a Pokemon's sprite is changed.
  * This event takes no time.
- * 
- * @author hydrozoa
- */
+ * */
 public class PokeSpriteEvent extends BattleEvent {
-	
-	private Texture region;
+
+	private String spriteName;
 	private BATTLE_PARTY party;
-	
-	public PokeSpriteEvent(Texture region, BATTLE_PARTY party) {
-		this.region = region;
+
+	public PokeSpriteEvent(String spriteName, BATTLE_PARTY party) {
+		this.spriteName = spriteName;
 		this.party = party;
 	}
-	
+
 	@Override
 	public void begin(BattleEventPlayer player) {
 		super.begin(player);
-		player.setPokemonSprite(region, party);
+		player.setPokemonSprite(spriteName, party);
 	}
 
 	@Override
 	public void update(float delta) {
-		
+
 	}
 
 	@Override
@@ -36,5 +34,3 @@ public class PokeSpriteEvent extends BattleEvent {
 	}
 
 }
-
-

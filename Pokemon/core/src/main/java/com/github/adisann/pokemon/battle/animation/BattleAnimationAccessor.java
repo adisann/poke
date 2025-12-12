@@ -1,10 +1,8 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import aurelienribon.tweenengine.TweenAccessor;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class BattleAnimationAccessor implements TweenAccessor<BattleAnimation> {
 	
 	public static final int PRIMARY_OFFSET_X = 0;
@@ -21,7 +19,7 @@ public class BattleAnimationAccessor implements TweenAccessor<BattleAnimation> {
 	public static final int SECONDARY_MASK_AMOUNT = 11;
 
 	@Override
-	public int getValues(BattleAnimation  target, int tweenType, float[] returnValues) {
+	public int getValues(BattleAnimation target, int tweenType, float[] returnValues) {
 		switch (tweenType) {
 			case PRIMARY_OFFSET_X:
 				returnValues[0] = target.getPrimaryOffsetX();
@@ -66,7 +64,7 @@ public class BattleAnimationAccessor implements TweenAccessor<BattleAnimation> {
 	}
 
 	@Override
-	public void setValues(BattleAnimation  target, int tweenType, float[] newValues) {
+	public void setValues(BattleAnimation target, int tweenType, float[] newValues) {
 		switch (tweenType) {
 			case PRIMARY_OFFSET_X:
 				target.setPrimaryX(newValues[0]);
@@ -110,5 +108,3 @@ public class BattleAnimationAccessor implements TweenAccessor<BattleAnimation> {
 	}
 
 }
-
-

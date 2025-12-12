@@ -1,18 +1,16 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-/**
- * @author hydrozoa
- */
+/** */
 public class AnimatedBattleSprite extends BattleSprite {
 	
-	private Animation  animation;
+	private Animation<TextureRegion> animation;
 	
 	private long startTime;
 
-	public AnimatedBattleSprite(Animation  animation, float x, float y, float width, float height, float delay) {
+	public AnimatedBattleSprite(Animation<TextureRegion> animation, float x, float y, float width, float height, float delay) {
 		super(animation.getKeyFrames()[0], x, y, width, height);
 		this.animation = animation;
 		this.startTime = System.currentTimeMillis()+(long)(delay*1000l);
@@ -32,5 +30,3 @@ public class AnimatedBattleSprite extends BattleSprite {
 		}
 	}
 }
-
-

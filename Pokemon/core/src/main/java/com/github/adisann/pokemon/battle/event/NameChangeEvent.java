@@ -1,13 +1,11 @@
-package com.github.adisann.pokemon.battle.event;
+﻿package com.github.adisann.pokemon.battle.event;
 
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
 
 /**
  * A BattleEvent where a Pokemon's name is changed, on the StatusBox.
  * This event takes no time.
- * 
- * @author hydrozoa
- */
+ * */
 public class NameChangeEvent extends BattleEvent {
 	
 	private String name;
@@ -34,5 +32,3 @@ public class NameChangeEvent extends BattleEvent {
 	}
 
 }
-
-

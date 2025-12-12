@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,10 +12,8 @@ import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Linear;
 import aurelienribon.tweenengine.equations.Sine;
 
-/**
- * @author hydrozoa
- */
-public class PokeballAnimation  extends BattleAnimation  {
+/** */
+public class PokeballAnimation extends BattleAnimation {
 	
 	/* Delay from start till the pokeball opens */
 	private float pokeballOpen = 0.5f;
@@ -70,7 +68,7 @@ public class PokeballAnimation  extends BattleAnimation  {
 		
 		
 		/* effects when the ball opens */
-		Animation  pokeballEffect = new Animation(0.025f, atlas.findRegions("pokeball_effect"));
+		Animation<TextureRegion> pokeballEffect = new Animation<TextureRegion>(0.025f, atlas.findRegions("pokeball_effect"));
 		
 		addEffectSprite(pokeballEffect, 0.5f, 0.62f, tweenManager);
 		addEffectSprite(pokeballEffect, -0.5f, 0.62f, tweenManager);
@@ -99,7 +97,7 @@ public class PokeballAnimation  extends BattleAnimation  {
 			.start(tweenManager);
 	}
 	
-	private void addEffectSprite(Animation  anim, float endX, float endY, TweenManager tweenManager) {
+	private void addEffectSprite(Animation<TextureRegion> anim, float endX, float endY, TweenManager tweenManager) {
 		AnimatedBattleSprite effectSprite = new AnimatedBattleSprite(
 				anim, 
 				0f, 
@@ -130,5 +128,3 @@ public class PokeballAnimation  extends BattleAnimation  {
 	}
 
 }
-
-

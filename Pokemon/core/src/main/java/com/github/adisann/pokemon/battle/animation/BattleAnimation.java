@@ -1,4 +1,4 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
-public abstract class BattleAnimation  {
+/** */
+public abstract class BattleAnimation {
 	
 	/* offsets of the animated pokemon */
 	private Vector2 primaryOffset = new Vector2();
@@ -36,13 +34,13 @@ public abstract class BattleAnimation  {
 	private Texture secondaryMask;
 	private float secondaryMaskAmount; 
 	
-	/* sprites that need rendering in this Animation  */
+	/* sprites that need rendering in this animation */
 	public List<BattleSprite> sprites;
 	
-	/* times the Animation  */
+	/* times the animation */
 	private float timer = 0f;
 	
-	/* total time the Animation  lasts */
+	/* total time the animation lasts */
 	private float duration;
 	
 	private AssetManager assetManager;
@@ -206,5 +204,3 @@ public abstract class BattleAnimation  {
 	}
 
 }
-
-

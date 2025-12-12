@@ -13,5 +13,3 @@ public enum MOVE_TYPE {
 	
 	;
 }
-
-

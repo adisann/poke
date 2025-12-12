@@ -1,14 +1,12 @@
-package com.github.adisann.pokemon.battle.animation;
+﻿package com.github.adisann.pokemon.battle.animation;
 
 import com.badlogic.gdx.assets.AssetManager;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 
-/**
- * @author hydrozoa
- */
-public class GoAnimation  extends BattleAnimation  {
+/** */
+public class GoAnimation extends BattleAnimation {
 
 	public GoAnimation() {
 		super(0.8f);
@@ -29,5 +27,3 @@ public class GoAnimation  extends BattleAnimation  {
 	}
 
 }
-
-

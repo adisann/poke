@@ -1,21 +1,19 @@
 package com.github.adisann.pokemon.lwjgl3;
 
-import com.github.adisann.pokemon.PokemonGame;
+import com.github.adisann.pokemon.PokemonGameMain;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.github.czyzby.autumn.fcs.scanner.DesktopClassScanner;
-import com.github.czyzby.autumn.mvc.application.AutumnApplication;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
     public static void main(String[] args) {
-        if (StartupHelper.startNewJvmIfRequired()) return; // This handles macOS support and helps on Windows.
+        if (StartupHelper.startNewJvmIfRequired())
+            return;
         createApplication();
     }
 
     private static Lwjgl3Application createApplication() {
-        return new Lwjgl3Application(new AutumnApplication(new DesktopClassScanner(), PokemonGame.class),
-            getDefaultConfiguration());
+        return new Lwjgl3Application(new PokemonGameMain(), getDefaultConfiguration());
     }
 
     private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
@@ -23,7 +21,7 @@ public class Lwjgl3Launcher {
         configuration.setTitle("pokemon");
         configuration.setWindowedMode(600, 400);
         configuration.useVsync(false);
-        configuration.setForegroundFPS(200);
+        configuration.setForegroundFPS(60);
         configuration.setWindowIcon("graphics/pokeball_icon.png");
         return configuration;
     }

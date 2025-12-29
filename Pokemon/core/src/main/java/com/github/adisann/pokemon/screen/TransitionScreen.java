@@ -3,23 +3,18 @@ package com.github.adisann.pokemon.screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.adisann.pokemon.PokemonGame;
+import com.github.adisann.pokemon.PokemonGameMain;
 import com.github.adisann.pokemon.screen.transition.Transition;
 import com.github.adisann.pokemon.util.Action;
-import com.github.czyzby.autumn.annotation.Component;
-import com.github.czyzby.autumn.annotation.Inject;
-import com.github.czyzby.autumn.mvc.component.ui.InterfaceService;
 
 /**
  * Used for transitions between screens.
- * */
-@Component
+ * Refactored to use callback pattern instead of Autumn MVC InterfaceService.
+ */
 public class TransitionScreen implements AbstractScreen {
 
-	@Inject
-	private PokemonGame app;
-	@Inject
-	private InterfaceService interfaceService;
+	private PokemonGameMain app;
+	private Action onTransitionComplete;
 
 	private AbstractScreen from;
 	private AbstractScreen to;
@@ -43,6 +38,10 @@ public class TransitionScreen implements AbstractScreen {
 	public TransitionScreen() {
 		batch = new SpriteBatch();
 		viewport = new ScreenViewport();
+	}
+
+	public void init(PokemonGameMain game) {
+		this.app = game;
 	}
 
 	@Override
@@ -72,8 +71,12 @@ public class TransitionScreen implements AbstractScreen {
 		} else if (state == TRANSITION_STATE.IN) {
 			inTransition.update(delta);
 			if (inTransition.isFinished()) {
-				// Transition completed, show the destination screen
-				interfaceService.show(to.getClass());
+				// Transition completed, show the destination screen using callback
+				if (onTransitionComplete != null) {
+					onTransitionComplete.action();
+				} else if (app != null) {
+					app.setScreen(to);
+				}
 			}
 		}
 	}
@@ -120,6 +123,17 @@ public class TransitionScreen implements AbstractScreen {
 		this.outTransition = out;
 		this.inTransition = in;
 		this.action = action;
+		this.state = TRANSITION_STATE.OUT;
+	}
+
+	public void startTransition(AbstractScreen from, AbstractScreen to, Transition out, Transition in, Action action,
+			Action onComplete) {
+		this.from = from;
+		this.to = to;
+		this.outTransition = out;
+		this.inTransition = in;
+		this.action = action;
+		this.onTransitionComplete = onComplete;
 		this.state = TRANSITION_STATE.OUT;
 	}
 }

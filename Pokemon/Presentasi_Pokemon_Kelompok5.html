@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Pokemon Game - Kelompok 5</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --code-bg: #f3f4f6;
+            --accent: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+        
+        @media print {
+            body {
+                padding: 20px 40px;
+                font-size: 11pt;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+            pre, table {
+                page-break-inside: avoid;
+            }
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+        }
+        
+        h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--text);
+            margin: 32px 0 16px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin: 24px 0 12px 0;
+        }
+        
+        h4 {
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--text);
+            margin: 20px 0 8px 0;
+        }
+        
+        p {
+            margin: 12px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid var(--border);
+            margin: 32px 0;
+        }
+        
+        ul, ol {
+            margin: 12px 0 12px 24px;
+        }
+        
+        li {
+            margin: 6px 0;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.95em;
+        }
+        
+        th, td {
+            border: 1px solid var(--border);
+            padding: 10px 14px;
+            text-align: left;
+        }
+        
+        th {
+            background: var(--code-bg);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #fef3c7 0%, #fef3c7 100%);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        .box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .box-green {
+            background: #f0fdf4;
+            border-left-color: var(--accent);
+        }
+        
+        .diagram {
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        
+        .diagram pre {
+            background: none;
+            color: var(--text);
+            text-align: left;
+            display: inline-block;
+        }
+        
+        .flow-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        
+        .flow-box {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+        
+        .flow-arrow {
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+        
+        .header-meta {
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-bottom: 32px;
+        }
+
+        .toc {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin: 24px 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: var(--text);
+        }
+        
+        .toc ol {
+            margin: 12px 0 0 20px;
+        }
+        
+        .toc li {
+            margin: 4px 0;
+        }
+        
+        .comment {
+            color: #6b7280;
+        }
+        
+        .keyword {
+            color: #c084fc;
+        }
+        
+        .string {
+            color: #86efac;
+        }
+        
+        .function {
+            color: #93c5fd;
+        }
+    </style>
+</head>
+<body>
+    <h1>📱 Dokumen Presentasi: Pokemon Game</h1>
+    <p class="header-meta">
+        <strong>Kelompok 5</strong> • Pemrograman Berorientasi Objek • Semester 5<br>
+        Dibuat: 23 Desember 2025
+    </p>
+    
+    <div class="toc">
+        <h3>📋 Daftar Isi</h3>
+        <ol>
+            <li>Gambaran Umum Proyek</li>
+            <li>Struktur Folder Proyek</li>
+            <li>Arsitektur MVC (Model-View-Controller)</li>
+            <li>Alur Game Dimulai (Game Start Flow)</li>
+            <li>Game Loop (Render Cycle)</li>
+            <li>Sistem Pertarungan (Battle System)</li>
+            <li>Sistem Save/Load</li>
+            <li>Ringkasan Konsep OOP yang Diterapkan</li>
+            <li>File-File Penting untuk Dipelajari</li>
+            <li>Cara Menjalankan Game</li>
+        </ol>
+    </div>
+
+    <hr>
+
+    <h2>1. Gambaran Umum Proyek</h2>
+    
+    <p>Proyek ini adalah clone game Pokemon yang dibuat menggunakan <strong>LibGDX</strong> framework untuk Java. Game ini menerapkan pola arsitektur <strong>MVC (Model-View-Controller)</strong> dengan fitur-fitur lengkap seperti:</p>
+    
+    <ul>
+        <li>Eksplorasi dunia dengan tile-based map</li>
+        <li>Sistem pertarungan Pokemon turn-based</li>
+        <li>Sistem save/load game</li>
+        <li>Dialog dan interaksi NPC</li>
+        <li>Animasi karakter (berjalan, berlari, bersepeda)</li>
+    </ul>
+    
+    <h3>Teknologi yang Digunakan</h3>
+    <table>
+        <tr><th>Teknologi</th><th>Kegunaan</th></tr>
+        <tr><td>Java 17+</td><td>Bahasa pemrograman utama</td></tr>
+        <tr><td>LibGDX</td><td>Framework game 2D</td></tr>
+        <tr><td>Gradle</td><td>Build system</td></tr>
+        <tr><td>Tween Engine</td><td>Library animasi</td></tr>
+        <tr><td>XML</td><td>Data konfigurasi (terrain, world objects, dialogues)</td></tr>
+    </table>
+
+    <hr>
+    
+    <h2>2. Struktur Folder Proyek</h2>
+    
+    <pre><code>Pokemon/
+├── assets/              <span class="comment"># Resource game (gambar, font, maps)</span>
+├── core/src/main/java/com/github/adisann/pokemon/
+│   ├── PokemonGameMain.java    <span class="comment"># Entry point utama game</span>
+│   ├── AppConfig.java          <span class="comment"># Konfigurasi aplikasi</span>
+│   ├── Settings.java           <span class="comment"># Konstanta pengaturan</span>
+│   │
+│   ├── <span class="keyword">model/</span>           <span class="comment"># [MODEL] - Data dan logika game</span>
+│   │   ├── Pokemon.java
+│   │   ├── actor/       <span class="comment"># Karakter yang bergerak</span>
+│   │   └── world/       <span class="comment"># Dunia game</span>
+│   │
+│   ├── <span class="keyword">controller/</span>      <span class="comment"># [CONTROLLER] - Input dan kontrol</span>
+│   │   ├── ActorMovementController.java
+│   │   ├── BattleScreenController.java
+│   │   └── DialogueController.java
+│   │
+│   ├── <span class="keyword">screen/</span>          <span class="comment"># [VIEW] - Tampilan layar</span>
+│   │   ├── GameScreen.java
+│   │   ├── BattleScreen.java
+│   │   └── renderer/    <span class="comment"># Renderer untuk menggambar</span>
+│   │
+│   ├── battle/          <span class="comment"># Sistem pertarungan</span>
+│   ├── dialogue/        <span class="comment"># Sistem dialog</span>
+│   ├── save/            <span class="comment"># Sistem save/load</span>
+│   └── ui/              <span class="comment"># Komponen UI</span>
+│
+└── lwjgl3/              <span class="comment"># Desktop launcher</span>
+    └── Lwjgl3Launcher.java</code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>3. Arsitektur MVC (Model-View-Controller)</h2>
+    
+    <div class="diagram">
+        <div class="flow-diagram">
+            <div class="flow-box">👁️ VIEW<br><small>GameScreen, BattleScreen</small></div>
+            <span class="flow-arrow">↔</span>
+            <div class="flow-box">🎮 CONTROLLER<br><small>ActorMovementController</small></div>
+            <span class="flow-arrow">↔</span>
+            <div class="flow-box">📦 MODEL<br><small>Pokemon, Actor, World</small></div>
+        </div>
+    </div>
+    
+    <h3>3.1 Model - Data & Logika Bisnis</h3>
+    <p><strong>Lokasi:</strong> <code>core/src/.../pokemon/model/</code></p>
+    <p>Model menyimpan data dan logika bisnis game. Komponen utama:</p>
+    
+    <h4>Pokemon.java</h4>
+    <p><strong>Fungsi:</strong> Representasi satu Pokemon dengan atribut dan kemampuan.</p>
+    <pre><code><span class="comment">// Atribut Pokemon</span>
+- species (PokemonSpecies)    <span class="comment">// Jenis Pokemon</span>
+- level (int)                  <span class="comment">// Level</span>
+- stats (Map&lt;STAT, Integer&gt;)  <span class="comment">// HP, Attack, Defence, dll</span>
+- currentHitpoints (int)      <span class="comment">// HP saat ini</span>
+- moves (Move[])              <span class="comment">// 4 skill yang dimiliki</span>
+
+<span class="comment">// Method penting</span>
+- <span class="function">calculateStats()</span>            <span class="comment">// Hitung stats berdasarkan level</span>
+- <span class="function">applyDamage(int)</span>           <span class="comment">// Terima damage</span>
+- <span class="function">gainExp(int)</span>               <span class="comment">// Gain EXP dan level up</span>
+- <span class="function">isFainted()</span>                <span class="comment">// Cek apakah HP = 0</span></code></pre>
+
+    <h4>Actor.java (model/actor/)</h4>
+    <p><strong>Fungsi:</strong> Base class untuk semua karakter yang bisa bergerak di dunia.</p>
+    <pre><code><span class="comment">// Atribut</span>
+- world (World)              <span class="comment">// Dunia tempat actor berada</span>
+- x, y (int)                 <span class="comment">// Posisi tile</span>
+- worldX, worldY (float)     <span class="comment">// Posisi render (interpolasi)</span>
+- facing (DIRECTION)         <span class="comment">// Arah hadap</span>
+- movementState              <span class="comment">// STILL atau MOVING</span>
+
+<span class="comment">// Method penting</span>
+- <span class="function">move(DIRECTION)</span>            <span class="comment">// Mulai gerakan</span>
+- <span class="function">update(float delta)</span>        <span class="comment">// Update posisi setiap frame</span>
+- <span class="function">changeWorld(World, x, y)</span>   <span class="comment">// Pindah ke world lain</span></code></pre>
+
+    <h4>World.java (model/world/)</h4>
+    <p><strong>Fungsi:</strong> Menyimpan data dunia game (map, actor, object).</p>
+    <pre><code><span class="comment">// Atribut</span>
+- name (String)              <span class="comment">// Nama unik world</span>
+- map (TileMap)              <span class="comment">// Grid tile 2D</span>
+- actors (List&lt;Actor&gt;)       <span class="comment">// Daftar karakter</span>
+- objects (List&lt;WorldObject&gt;)<span class="comment">// Daftar objek</span>
+
+<span class="comment">// Method penting</span>
+- <span class="function">addActor(Actor)</span>            <span class="comment">// Tambah karakter ke world</span>
+- <span class="function">update(float delta)</span>        <span class="comment">// Update semua entity</span></code></pre>
+
+    <h3>3.2 View - Tampilan Visual</h3>
+    <p><strong>Lokasi:</strong> <code>core/src/.../pokemon/screen/</code></p>
+    <p>View bertanggung jawab menampilkan game ke layar.</p>
+
+    <h4>GameScreen.java</h4>
+    <p><strong>Fungsi:</strong> Layar utama saat bermain di dunia (eksplorasi).</p>
+    <pre><code><span class="comment">// Komponen utama</span>
+- worldRenderer              <span class="comment">// Render map dan sprite</span>
+- dialogueBox               <span class="comment">// Box untuk dialog</span>
+- uiStage                   <span class="comment">// Stage untuk UI</span>
+
+<span class="comment">// Lifecycle methods</span>
+- <span class="function">show()</span>                    <span class="comment">// Dipanggil saat screen aktif</span>
+- <span class="function">render(float delta)</span>       <span class="comment">// Dipanggil setiap frame</span>
+- <span class="function">update(float delta)</span>       <span class="comment">// Update logika game</span></code></pre>
+
+    <h4>BattleScreen.java</h4>
+    <p><strong>Fungsi:</strong> Layar pertarungan Pokemon.</p>
+    <pre><code><span class="comment">// Komponen</span>
+- battle (Battle)           <span class="comment">// Logic pertarungan</span>
+- battleRenderer            <span class="comment">// Render arena battle</span>
+
+<span class="comment">// Method penting</span>
+- <span class="function">setBattleContext(Trainer, Pokemon)</span>  <span class="comment">// Set konteks</span>
+- <span class="function">render(float delta)</span>                  <span class="comment">// Render battle</span></code></pre>
+
+    <h3>3.3 Controller - Input & Kontrol</h3>
+    <p><strong>Lokasi:</strong> <code>core/src/.../pokemon/controller/</code></p>
+
+    <h4>ActorMovementController.java</h4>
+    <p><strong>Fungsi:</strong> Mengontrol pergerakan karakter dari input keyboard.</p>
+    <pre><code><span class="comment">// Input yang ditangani</span>
+- Arrow Keys → Bergerak (NORTH, SOUTH, EAST, WEST)
+- SHIFT → Berlari
+- F1 → Toggle sepeda
+
+<span class="comment">// Method penting</span>
+- <span class="function">keyDown(int keycode)</span>      <span class="comment">// Saat tombol ditekan</span>
+- <span class="function">keyUp(int keycode)</span>        <span class="comment">// Saat tombol dilepas</span>
+- <span class="function">update(float delta)</span>       <span class="comment">// Proses input</span></code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>4. Alur Game Dimulai (Game Start Flow)</h2>
+    
+    <div class="box">
+        <strong>🚀 Urutan Eksekusi saat Game Dimulai:</strong>
+    </div>
+
+    <div class="flow-diagram" style="flex-direction: column; gap: 12px;">
+        <div class="flow-box" style="width: 100%; max-width: 500px;">1️⃣ <strong>Lwjgl3Launcher.main()</strong> - Entry Point Desktop</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-box" style="width: 100%; max-width: 500px;">2️⃣ <strong>PokemonGameMain.create()</strong> - Inisialisasi Game</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-box" style="width: 100%; max-width: 500px;">3️⃣ <strong>Load Assets</strong> (textures, fonts, worlds, shaders)</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-box" style="width: 100%; max-width: 500px;">4️⃣ <strong>GameScreen.init() + show()</strong> - Setup Layar</div>
+        <span class="flow-arrow">↓</span>
+        <div class="flow-box" style="width: 100%; max-width: 500px; background: #10b981;">5️⃣ <strong>Game Running!</strong> → render() dipanggil 60x/detik</div>
+    </div>
+
+    <h3>Detail Langkah-Langkah:</h3>
+
+    <h4>Step 1: Entry Point (Lwjgl3Launcher.java)</h4>
+    <pre><code><span class="keyword">public static void</span> <span class="function">main</span>(String[] args) {
+    createApplication();
+}
+
+<span class="keyword">private static</span> Lwjgl3Application <span class="function">createApplication</span>() {
+    <span class="keyword">return new</span> Lwjgl3Application(<span class="keyword">new</span> PokemonGameMain(), getDefaultConfiguration());
+}</code></pre>
+
+    <h4>Step 2: Game Initialization (PokemonGameMain.java)</h4>
+    <pre><code><span class="keyword">public void</span> <span class="function">create</span>() {
+    <span class="comment">// 1. Inisialisasi managers</span>
+    assetManager = <span class="keyword">new</span> AssetManager();
+    tweenManager = <span class="keyword">new</span> TweenManager();
+    moveDatabase = <span class="keyword">new</span> MoveDatabase();
+    saveManager = <span class="keyword">new</span> SaveManager();
+    
+    <span class="comment">// 2. Load shaders untuk efek visual</span>
+    initShaders();
+    
+    <span class="comment">// 3. Load semua assets</span>
+    loadAssets();
+    assetManager.finishLoading();
+    
+    <span class="comment">// 4. Create dan show GameScreen</span>
+    gameScreen = <span class="keyword">new</span> GameScreen();
+    gameScreen.init(<span class="keyword">this</span>);
+    setScreen(gameScreen);
+}</code></pre>
+
+    <h4>Step 3: GameScreen Activation (GameScreen.java)</h4>
+    <pre><code><span class="keyword">public void</span> <span class="function">show</span>() {
+    <span class="comment">// 1. Setup player</span>
+    world = worlds.get(<span class="string">"littleroot_town"</span>);
+    player = <span class="keyword">new</span> PlayerActor(world, safeX, safeY, animations, <span class="keyword">this</span>);
+    world.addActor(player);
+    
+    <span class="comment">// 2. Load atau new game</span>
+    <span class="keyword">if</span> (saveManager.hasSaveGame(0)) {
+        <span class="comment">// Load saved data</span>
+    } <span class="keyword">else</span> {
+        <span class="comment">// New game - beri starter Pokemon</span>
+        playerTrainer = <span class="keyword">new</span> Trainer(
+            Pokemon.generatePokemon(<span class="string">"Bulba"</span>, <span class="string">"bulbasaur.png"</span>, moveDatabase)
+        );
+    }
+    
+    <span class="comment">// 3. Setup controllers</span>
+    playerController = <span class="keyword">new</span> ActorMovementController(player);
+    worldRenderer = <span class="keyword">new</span> WorldRenderer(assetManager, world);
+}</code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>5. Game Loop (Render Cycle)</h2>
+    
+    <p>Setiap frame (60 FPS = 60x per detik), method berikut dipanggil:</p>
+
+    <pre><code><span class="comment">// GameScreen.java</span>
+<span class="keyword">public void</span> <span class="function">render</span>(<span class="keyword">float</span> delta) {
+    <span class="comment">// 1. Clear screen (hapus gambar sebelumnya)</span>
+    Gdx.gl.glClearColor(0, 0, 0, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    
+    <span class="comment">// 2. Update game logic</span>
+    update(delta);
+    
+    <span class="comment">// 3. Render world</span>
+    batch.begin();
+    worldRenderer.render(batch, camera);
+    batch.end();
+    
+    <span class="comment">// 4. Render UI</span>
+    uiStage.draw();
+}
+
+<span class="keyword">private void</span> <span class="function">update</span>(<span class="keyword">float</span> delta) {
+    <span class="comment">// Update player movement</span>
+    playerController.update(delta);
+    
+    <span class="comment">// Check wild Pokemon encounter</span>
+    <span class="keyword">if</span> (playerJustFinishedStep()) {
+        Pokemon wild = encounterManager.checkEncounter(world, x, y);
+        <span class="keyword">if</span> (wild != <span class="keyword">null</span>) {
+            startBattle(wild);
+        }
+    }
+    
+    <span class="comment">// Update camera dan world</span>
+    camera.update(player.getWorldX(), player.getWorldY());
+    world.update(delta);
+}</code></pre>
+
+    <h2>6. Sistem Pertarungan (Battle System)</h2>
+    
+    <h3>Alur Memulai Battle</h3>
+    
+    <div class="flow-diagram" style="flex-wrap: wrap;">
+        <div class="flow-box">Player selesai langkah</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Cek Encounter?</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Generate Wild Pokemon</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box" style="background: #10b981;">BattleScreen aktif!</div>
+    </div>
+
+    <h4>Battle.java - Logic Pertarungan</h4>
+    <pre><code><span class="keyword">public class</span> Battle {
+    <span class="keyword">enum</span> STATE { READY_TO_PROGRESS, SELECT_NEW_POKEMON, RAN, WIN, LOSE }
+    
+    <span class="comment">// Atribut</span>
+    - player (Pokemon)           <span class="comment">// Pokemon player aktif</span>
+    - opponent (Pokemon)         <span class="comment">// Pokemon lawan</span>
+    - mechanics (BattleMechanics)
+    
+    <span class="comment">// Method</span>
+    - <span class="function">beginBattle()</span>             <span class="comment">// Animasi awal</span>
+    - <span class="function">progress(int input)</span>       <span class="comment">// Proses satu turn</span>
+    - <span class="function">playTurn(BATTLE_PARTY, int)</span> <span class="comment">// Eksekusi gerakan</span>
+    - <span class="function">attemptRun()</span>              <span class="comment">// Kabur</span>
+}</code></pre>
+
+    <div class="page-break"></div>
+
+    <h2>7. Sistem Save/Load</h2>
+    
+    <h4>SaveManager.java</h4>
+    <pre><code><span class="keyword">public class</span> SaveManager {
+    <span class="comment">// Simpan ke LibGDX Preferences (cross-platform)</span>
+    <span class="keyword">private static final</span> String PREFERENCES_NAME = <span class="string">"pokemon_save"</span>;
+    <span class="keyword">private static final int</span> MAX_SAVE_SLOTS = 3;
+    
+    <span class="comment">// Data yang disimpan (GameSaveData)</span>
+    - worldName          <span class="comment">// Nama world saat save</span>
+    - playerX, playerY   <span class="comment">// Posisi player</span>
+    - playerFacing       <span class="comment">// Arah hadap</span>
+    - team (List&lt;Pokemon&gt;) <span class="comment">// Tim Pokemon</span>
+    - playtimeSeconds    <span class="comment">// Waktu bermain</span>
+    
+    <span class="comment">// Method</span>
+    - <span class="function">saveGame(slot, data)</span>    <span class="comment">// Simpan ke slot</span>
+    - <span class="function">loadGame(slot)</span>          <span class="comment">// Load dari slot</span>
+    - <span class="function">quickSave(data)</span>         <span class="comment">// Save cepat (F5)</span>
+    - <span class="function">quickLoad()</span>             <span class="comment">// Load cepat (F8)</span>
+}</code></pre>
+
+    <hr>
+
+    <h2>8. Ringkasan Konsep OOP yang Diterapkan</h2>
+    
+    <table>
+        <tr><th>Konsep OOP</th><th>Implementasi dalam Proyek</th></tr>
+        <tr><td><strong>Encapsulation</strong></td><td>Semua atribut <code>private</code> dengan getter/setter</td></tr>
+        <tr><td><strong>Inheritance</strong></td><td><code>PlayerActor extends Actor</code>, <code>DamageMove extends Move</code></td></tr>
+        <tr><td><strong>Polymorphism</strong></td><td>Interface <code>Screen</code> untuk <code>GameScreen</code>, <code>BattleScreen</code></td></tr>
+        <tr><td><strong>Abstraction</strong></td><td>Interface <code>AbstractScreen</code>, <code>BattleEventQueuer</code></td></tr>
+        <tr><td><strong>Composition</strong></td><td><code>GameScreen</code> has-a <code>WorldRenderer</code>, <code>DialogueController</code></td></tr>
+        <tr><td><strong>Observer Pattern</strong></td><td><code>ActorObserver</code> untuk event pergerakan</td></tr>
+        <tr><td><strong>MVC Pattern</strong></td><td>Pemisahan Model/View/Controller yang jelas</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>9. File-File Penting untuk Dipelajari</h2>
+    
+    <table>
+        <tr><th>File</th><th>Lokasi</th><th>Penjelasan</th></tr>
+        <tr><td><code>PokemonGameMain.java</code></td><td>core/src/.../</td><td>Entry point, inisialisasi game</td></tr>
+        <tr><td><code>GameScreen.java</code></td><td>.../screen/</td><td>Layar utama eksplorasi</td></tr>
+        <tr><td><code>BattleScreen.java</code></td><td>.../screen/</td><td>Layar pertarungan</td></tr>
+        <tr><td><code>Pokemon.java</code></td><td>.../model/</td><td>Data Pokemon</td></tr>
+        <tr><td><code>Actor.java</code></td><td>.../model/actor/</td><td>Base class karakter</td></tr>
+        <tr><td><code>World.java</code></td><td>.../model/world/</td><td>Data dunia game</td></tr>
+        <tr><td><code>ActorMovementController.java</code></td><td>.../controller/</td><td>Kontrol gerakan</td></tr>
+        <tr><td><code>Battle.java</code></td><td>.../battle/</td><td>Logic pertarungan</td></tr>
+        <tr><td><code>WorldRenderer.java</code></td><td>.../screen/renderer/</td><td>Render dunia</td></tr>
+        <tr><td><code>SaveManager.java</code></td><td>.../save/</td><td>Sistem save/load</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>10. Cara Menjalankan Game</h2>
+    
+    <div class="box box-green">
+        <strong>🖥️ Command untuk Menjalankan:</strong>
+        <pre style="background: #064e3b; margin-top: 12px;"><code># Via Gradle (Recommended)
+./gradlew.bat lwjgl3:run
+
+# Via JAR (membutuhkan Java 17+)
+java -jar lwjgl3/build/libs/pokemon-1.0.0.jar</code></pre>
+    </div>
+
+    <h3>🎮 Kontrol Game</h3>
+    <table>
+        <tr><th>Tombol</th><th>Fungsi</th></tr>
+        <tr><td>Arrow Keys</td><td>Bergerak</td></tr>
+        <tr><td>X</td><td>Interaksi / Select</td></tr>
+        <tr><td>Z</td><td>Cancel / Back</td></tr>
+        <tr><td>Shift (tahan)</td><td>Berlari</td></tr>
+        <tr><td>F1</td><td>Toggle sepeda</td></tr>
+        <tr><td>F5</td><td>Quick Save</td></tr>
+        <tr><td>F8</td><td>Quick Load</td></tr>
+    </table>
+
+    <hr>
+    
+    <p style="text-align: center; color: var(--text-light); margin-top: 40px;">
+        <em>Dokumen ini dibuat untuk keperluan presentasi progress<br>
+        Tugas Besar Pemrograman Berorientasi Objek - Kelompok 5</em>
+    </p>
+
+</body>
+</html>

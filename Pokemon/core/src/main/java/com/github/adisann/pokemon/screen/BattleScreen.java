@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.github.adisann.pokemon.PokemonGame;
 import com.github.adisann.pokemon.PokemonGameMain;
 import com.github.adisann.pokemon.Settings;
 import com.github.adisann.pokemon.battle.BATTLE_PARTY;
@@ -35,25 +33,19 @@ import com.github.adisann.pokemon.ui.DialogueBox;
 import com.github.adisann.pokemon.ui.MoveSelectBox;
 import com.github.adisann.pokemon.ui.OptionBox;
 import com.github.adisann.pokemon.ui.StatusBox;
-import com.github.czyzby.autumn.annotation.Inject;
-import com.github.czyzby.autumn.mvc.component.ui.InterfaceService;
-import com.github.czyzby.autumn.mvc.stereotype.View;
 
 import aurelienribon.tweenengine.TweenManager;
 
-/** */
-@View(id = "battle", value = "")
+/**
+ * Battle screen for Pokemon battles.
+ * Uses standard LibGDX Screen interface with manual dependency injection.
+ */
 public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 
-	/* Core */
-	// @Inject -> Manual injection via init()
+	/* Core - Manual injection via init() */
 	private PokemonGameMain app;
-	@Inject
 	private AssetManager assetManager;
-	@Inject
 	private TweenManager tweenManager;
-	@Inject
-	private InterfaceService interfaceService;
 
 	private Skin skin;
 

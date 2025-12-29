@@ -15,7 +15,10 @@ import com.github.adisann.pokemon.model.world.cutscene.DoorEvent;
 import com.github.adisann.pokemon.model.world.cutscene.WaitEvent;
 import com.github.adisann.pokemon.worldloader.LTerrain;
 
-/** */
+/**
+ * A tile that teleports the player to another world/location when stepped on.
+ * Fixed: Added bounds checking for target tile access.
+ */
 public class TeleportTile extends Tile {
 
 	/* destination */
@@ -77,8 +80,28 @@ public class TeleportTile extends Tile {
 
 				World nextWorld = cutscenes.getWorld(worldName);
 
-				if (nextWorld.getMap().getTile(x, y).getObject() != null) { // the target tile has an object
-					WorldObject targetObj = nextWorld.getMap().getTile(x, y).getObject();
+				// BUGFIX: Add null check for world
+				if (nextWorld == null) {
+					System.out.println("ERROR: World '" + worldName + "' not found!");
+					return true; // Block teleport if world doesn't exist
+				}
+
+				// BUGFIX: Add bounds checking for target tile
+				TileMap targetMap = nextWorld.getMap();
+				if (x < 0 || x >= targetMap.getWidth() || y < 0 || y >= targetMap.getHeight()) {
+					System.out.println(
+							"ERROR: Target tile (" + x + "," + y + ") is out of bounds for world " + worldName);
+					return true; // Block teleport if target is out of bounds
+				}
+
+				Tile targetTile = targetMap.getTile(x, y);
+				if (targetTile == null) {
+					System.out.println("ERROR: Target tile is null!");
+					return true;
+				}
+
+				if (targetTile.getObject() != null) { // the target tile has an object
+					WorldObject targetObj = targetTile.getObject();
 					if (targetObj instanceof Door) {
 						Door targetDoor = (Door) targetObj;
 						cutscenes.queueEvent(new ActorWalkEvent(a, playerDirection));

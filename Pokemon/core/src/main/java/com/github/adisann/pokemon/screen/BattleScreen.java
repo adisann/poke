@@ -70,6 +70,35 @@ public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 		this.pendingOpponent = opponent;
 	}
 
+	/**
+	 * Set battle context for trainer battles (vs NPC trainer).
+	 * 
+	 * @param player    Player's trainer
+	 * @param opponent  Opponent trainer (NPC)
+	 * @param trainerId Unique ID for the trainer (for save system)
+	 */
+	public void setTrainerBattleContext(Trainer player, Trainer opponent, String trainerId) {
+		this.pendingPlayer = player;
+		this.pendingOpponentTrainer = opponent;
+		this.opponentTrainerId = trainerId;
+	}
+
+	/**
+	 * Callback interface for battle end events.
+	 */
+	public interface BattleEndCallback {
+		void onBattleEnd(boolean playerWon);
+	}
+
+	/**
+	 * Set a callback to be called when the battle ends.
+	 * 
+	 * @param callback Callback to call with battle result
+	 */
+	public void setBattleEndCallback(BattleEndCallback callback) {
+		this.battleEndCallback = callback;
+	}
+
 	/* Controller */
 	private BattleScreenController controller;
 
@@ -85,6 +114,9 @@ public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 
 	private Trainer pendingPlayer;
 	private Pokemon pendingOpponent;
+	private Trainer pendingOpponentTrainer; // For trainer battles
+	private String opponentTrainerId; // For save system
+	private BattleEndCallback battleEndCallback;
 
 	/* View */
 	// private BitmapFont text = new BitmapFont(); // Removed: not used in new
@@ -136,11 +168,19 @@ public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 		gameViewport = new ScreenViewport();
 		batch = new SpriteBatch();
 
-		if (pendingPlayer != null && pendingOpponent != null) {
+		// Initialize battle based on context type
+		if (pendingPlayer != null && pendingOpponentTrainer != null) {
+			// Trainer battle
+			battle = new Battle(pendingPlayer, pendingOpponentTrainer, app.getMoveDatabase());
+			pendingPlayer = null;
+			pendingOpponentTrainer = null;
+		} else if (pendingPlayer != null && pendingOpponent != null) {
+			// Wild battle
 			battle = new Battle(pendingPlayer, pendingOpponent, app.getMoveDatabase());
 			pendingPlayer = null;
 			pendingOpponent = null;
 		} else {
+			// Debug fallback
 			Trainer playerTrainer = new Trainer(
 					Pokemon.generatePokemon("Bulba", "graphics/pokemon/bulbasaur.png", app.getMoveDatabase()));
 			playerTrainer.addPokemon(
@@ -254,8 +294,16 @@ public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 						controller.restartTurn();
 					}
 				} else if (battle.getState() == STATE.WIN) {
+					// Invoke callback for trainer battle persistence
+					if (battleEndCallback != null) {
+						battleEndCallback.onBattleEnd(true);
+					}
 					app.setScreen(app.getGameScreen());
 				} else if (battle.getState() == STATE.LOSE) {
+					// Invoke callback for trainer battle (player lost)
+					if (battleEndCallback != null) {
+						battleEndCallback.onBattleEnd(false);
+					}
 					// Do NOT auto-heal - HP stays 0, player must go to Mom's house
 					// Teleport player to first town (littleroot_town spawn point)
 					app.getGameScreen().teleportToFirstTown();

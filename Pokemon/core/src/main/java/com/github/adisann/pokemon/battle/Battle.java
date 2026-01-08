@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.github.adisann.pokemon.battle.animation.FaintingAnimation;
 import com.github.adisann.pokemon.battle.animation.PokeballAnimation;
+import com.github.adisann.pokemon.battle.animation.OpponentPokeballAnimation;
 import com.github.adisann.pokemon.battle.animation.SlideInAnimation;
+import com.github.adisann.pokemon.battle.animation.SlideOutAnimation;
 import com.github.adisann.pokemon.battle.event.AnimationBattleEvent;
 import com.github.adisann.pokemon.battle.event.BattleEvent;
 import com.github.adisann.pokemon.battle.event.BattleEventQueuer;
@@ -60,16 +62,72 @@ public class Battle implements BattleEventQueuer {
 	}
 
 	/**
+	 * Constructor for trainer battles (player vs NPC trainer).
+	 * 
+	 * @param player       Player's trainer
+	 * @param opponent     Opponent trainer (NPC)
+	 * @param moveDatabase Move database for move lookups
+	 */
+	public Battle(Trainer player, Trainer opponent, MoveDatabase moveDatabase) {
+		this.playerTrainer = player;
+		this.opponentTrainer = opponent;
+		this.player = player.getPokemon(0);
+		this.opponent = opponent.getPokemon(0);
+		this.moveDatabase = moveDatabase;
+		mechanics = new BattleMechanics();
+		this.state = STATE.READY_TO_PROGRESS;
+	}
+
+	/**
+	 * Check if this is a trainer battle (vs NPC trainer, not wild Pokemon).
+	 * Used to disable catching and running.
+	 * 
+	 * @return true if this is a trainer battle
+	 */
+	public boolean isTrainerBattle() {
+		return opponentTrainer != null;
+	}
+
+	/**
 	 * Plays appropriate animation for starting a battle
 	 * Pokemon Emerald style: opponent slides in from right, then player's Pokemon
 	 * appears
 	 */
 	public void beginBattle() {
-		// Wild Pokemon appeared - slides in from right
-		queueEvent(new PokeSpriteEvent(opponent.getSpriteName(), BATTLE_PARTY.OPPONENT));
-		queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new SlideInAnimation(true)));
+		if (isTrainerBattle()) {
+			// TRAINER BATTLE INTRO
+			// 1. Show Trainer Sprite
+			String trainerSprite = opponentTrainer.getSpriteName();
+			if (trainerSprite == null) {
+				// Fallback if no sprite set
+				trainerSprite = opponent.getSpriteName();
+			}
+			queueEvent(new PokeSpriteEvent(trainerSprite, BATTLE_PARTY.OPPONENT));
 
-		// Initialize opponent HP bar
+			// 2. Slide Trainer IN
+			queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new SlideInAnimation(true)));
+
+			// 3. Intro Text
+			queueEvent(new TextEvent("Trainer May wants to battle!", 2f));
+
+			// 4. Slide Trainer OUT
+			queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new SlideOutAnimation(true)));
+
+			// 5. Send out Pokemon (Switch sprite)
+			queueEvent(new PokeSpriteEvent(opponent.getSpriteName(), BATTLE_PARTY.OPPONENT));
+
+			// 6. Pokeball Animation IN
+			queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new OpponentPokeballAnimation()));
+			queueEvent(new TextEvent("Trainer May sent out " + opponent.getName() + "!", 1.5f));
+		} else {
+			// WILD POKEMON INTRO
+			// Wild Pokemon appeared - slides in from right
+			queueEvent(new PokeSpriteEvent(opponent.getSpriteName(), BATTLE_PARTY.OPPONENT));
+			queueEvent(new AnimationBattleEvent(BATTLE_PARTY.OPPONENT, new SlideInAnimation(true)));
+			queueEvent(new TextEvent("Wild " + opponent.getName() + " appeared!", 1f));
+		}
+
+		// Initialize opponent HP bar (Common)
 		queueEvent(new HPAnimationEvent(
 				BATTLE_PARTY.OPPONENT,
 				opponent.getCurrentHitpoints(),
@@ -77,7 +135,6 @@ public class Battle implements BattleEventQueuer {
 				opponent.getStat(STAT.HITPOINTS),
 				0f));
 
-		queueEvent(new TextEvent("Wild " + opponent.getName() + " appeared!", 1f));
 		queueEvent(new TextEvent("Go " + player.getName() + "!", 0.8f));
 
 		// Initialize player HP bar

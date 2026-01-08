@@ -9,10 +9,19 @@ import com.github.adisann.pokemon.model.Pokemon;
 public class Trainer {
 
 	private List<Pokemon> team;
+	private String spriteName;
 
 	public Trainer(Pokemon pokemon) {
 		team = new ArrayList<Pokemon>();
 		team.add(pokemon);
+	}
+
+	public void setSpriteName(String spriteName) {
+		this.spriteName = spriteName;
+	}
+
+	public String getSpriteName() {
+		return spriteName;
 	}
 
 	public boolean addPokemon(Pokemon pokemon) {

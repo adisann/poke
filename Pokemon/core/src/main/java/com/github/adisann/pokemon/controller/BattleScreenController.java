@@ -142,10 +142,19 @@ public class BattleScreenController extends InputAdapter {
                     }
                     break;
                 case RUN:
-                    battle.attemptRun();
-                    this.state = STATE.DEACTIVATED;
-                    actionMenu.setVisible(false);
-                    dialogue.setVisible(false);
+                    // Block running from trainer battles
+                    if (battle.isTrainerBattle()) {
+                        battle.queueEvent(new com.github.adisann.pokemon.battle.event.TextEvent(
+                                "You can't run from a trainer battle!", 2f));
+                        this.state = STATE.DEACTIVATED;
+                        actionMenu.setVisible(false);
+                        dialogue.setVisible(false);
+                    } else {
+                        battle.attemptRun();
+                        this.state = STATE.DEACTIVATED;
+                        actionMenu.setVisible(false);
+                        dialogue.setVisible(false);
+                    }
                     break;
             }
         }
@@ -199,10 +208,17 @@ public class BattleScreenController extends InputAdapter {
             optionBox.setVisible(false);
 
             if (selection == 0) {
-                // POKE BALL - attempt catch
-                battle.attemptCatch(1.0f);
-                this.state = STATE.DEACTIVATED;
-                dialogue.setVisible(false);
+                // POKE BALL - attempt catch (blocked in trainer battles)
+                if (battle.isTrainerBattle()) {
+                    battle.queueEvent(new com.github.adisann.pokemon.battle.event.TextEvent(
+                            "You can't catch another trainer's Pokemon!", 2f));
+                    this.state = STATE.DEACTIVATED;
+                    dialogue.setVisible(false);
+                } else {
+                    battle.attemptCatch(1.0f);
+                    this.state = STATE.DEACTIVATED;
+                    dialogue.setVisible(false);
+                }
             } else if (selection == 1) {
                 // POTION - heal player's Pokemon
                 // For simplicity, auto-heal the active Pokemon

@@ -62,7 +62,7 @@ import com.github.adisann.pokemon.model.actor.Actor.MOVEMENT_MODE;
 
 /**
  * Main game screen using standard LibGDX Screen interface.
- * */
+ */
 public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEvent.ScreenFadeHandler {
 
 	private PokemonGameMain game;
@@ -105,38 +105,59 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 	private DialogueBox dialogueBox;
 	private OptionBox optionsBox;
 	private OptionBox debugBox;
-	
+
 	/* Start Menu */
 	private StartMenu startMenu;
 	private Table startMenuRoot;
 	private boolean startMenuOpen = false;
-	
+
 	/* Party Display */
 	private PartyDisplay partyDisplay;
 	private Table partyDisplayRoot;
 	private boolean partyDisplayOpen = false;
-	
+
 	/* Bag Display */
 	private BagDisplay bagDisplay;
 	private Table bagDisplayRoot;
 	private boolean bagDisplayOpen = false;
 	private Inventory playerInventory;
-	
+
 	/* Message timer for auto-dismiss */
 	private float saveMessageTimer = 0f;
 
 	/* Screen fade state - Pokemon GBA style */
 	private boolean isFading = false;
-	private float fadeProgress = 0f;      // 0.0 = no fade, 1.0 = fully black
+	private float fadeProgress = 0f; // 0.0 = no fade, 1.0 = fully black
 	private float fadeStartProgress = 0f;
 	private float fadeEndProgress = 1f;
 	private float fadeDuration = 0.5f;
 	private float fadeElapsed = 0f;
-	private static final float FADE_STEPS = 8f;  // Number of color steps (GBA style)
+	private static final float FADE_STEPS = 8f; // Number of color steps (GBA style)
 	private ShaderProgram fadeShader;
 	private ShaderProgram defaultShader;
 
 	public GameScreen() {
+	}
+
+	// Track defeated trainers in current session (fallback if save fails)
+	private java.util.Set<String> sessionDefeatedTrainers = new java.util.HashSet<>();
+
+	/**
+	 * Check if a trainer is defeated (checks both session and save data).
+	 */
+	public boolean isTrainerDefeated(String trainerId) {
+		if (sessionDefeatedTrainers.contains(trainerId)) {
+			return true;
+		}
+		GameSaveData data = getSaveData();
+		return data != null && data.isDefeated(trainerId);
+	}
+
+	/**
+	 * Mark a trainer as defeated in session memory.
+	 */
+	public void markTrainerDefeated(String trainerId) {
+		sessionDefeatedTrainers.add(trainerId);
 	}
 
 	/**
@@ -244,7 +265,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				playerTrainer = new Trainer(
 						Pokemon.generatePokemon("Bulba", "graphics/pokemon/bulbasaur.png", game.getMoveDatabase()));
 			}
-			
+
 			// Initialize inventory with starter items
 			playerInventory = new Inventory();
 			playerInventory.addStarterItems();
@@ -258,6 +279,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 			playerController = new ActorMovementController(player);
 			dialogueController = new DialogueController(dialogueBox, optionsBox);
 			interactionController = new InteractionController(player, dialogueController);
+			interactionController.setGameScreen(this); // For trainer battle support
 			debugController = new OptionBoxController(debugBox);
 			debugController.addAction(new Action() {
 				@Override
@@ -295,8 +317,9 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 
 		update(delta);
 		gameViewport.apply();
-		
-		// Apply fade shader when fadeProgress > 0 (keeps screen black between FADE_OUT and FADE_IN)
+
+		// Apply fade shader when fadeProgress > 0 (keeps screen black between FADE_OUT
+		// and FADE_IN)
 		// This prevents flickering when transitioning between fade events
 		if (fadeProgress > 0f && fadeShader != null) {
 			batch.setShader(fadeShader);
@@ -307,7 +330,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		} else {
 			batch.setShader(defaultShader);
 		}
-		
+
 		batch.begin();
 		worldRenderer.render(batch, camera);
 		queueRenderer.render(batch, currentEvent);
@@ -320,7 +343,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		// + " Vis: " + player.isVisible());
 
 		batch.end();
-		
+
 		// Reset shader after rendering
 		if (fadeProgress > 0f) {
 			batch.setShader(defaultShader);
@@ -374,7 +397,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				}
 				return; // Don't process other inputs this frame
 			}
-			
+
 			// Start Menu navigation when open
 			if (startMenuOpen) {
 				if (Gdx.input.isKeyJustPressed(Keys.UP)) {
@@ -388,7 +411,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				}
 				return; // Don't process other game inputs when menu is open
 			}
-			
+
 			// Party Display navigation when open
 			if (partyDisplayOpen && partyDisplay != null) {
 				if (Gdx.input.isKeyJustPressed(Keys.UP)) {
@@ -408,7 +431,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				}
 				return; // Don't process other game inputs when party display is open
 			}
-			
+
 			// Bag Display navigation when open
 			if (bagDisplayOpen && bagDisplay != null) {
 				if (Gdx.input.isKeyJustPressed(Keys.UP)) {
@@ -429,12 +452,12 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 								dialogueBox.setVisible(true);
 								saveMessageTimer = 2.0f;
 							} else {
-								boolean used = playerInventory.useItem(bagDisplay.getSelectedIndex(), 
-									playerTrainer.getPokemon(0));
+								boolean used = playerInventory.useItem(bagDisplay.getSelectedIndex(),
+										playerTrainer.getPokemon(0));
 								if (used) {
 									closeBagDisplay();
-									dialogueBox.animateText(selectedItem.getName() + " used on " + 
-										playerTrainer.getPokemon(0).getName() + "!");
+									dialogueBox.animateText(selectedItem.getName() + " used on " +
+											playerTrainer.getPokemon(0).getName() + "!");
 									dialogueBox.setVisible(true);
 									saveMessageTimer = 2.0f;
 								} else {
@@ -451,7 +474,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				}
 				return; // Don't process other game inputs when bag is open
 			}
-			
+
 			// Check inputs for Save/Load (quick save with F5)
 			if (Gdx.input.isKeyJustPressed(Keys.F5)) {
 				GameSaveData data = new GameSaveData(world.getName(), player.getX(), player.getY(),
@@ -495,7 +518,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		}
 
 		dialogueController.update(delta);
-		
+
 		// Auto-dismiss save message after timer expires
 		if (saveMessageTimer > 0) {
 			saveMessageTimer -= delta;
@@ -517,7 +540,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 			fadeElapsed += delta;
 			float t = Math.min(1f, fadeElapsed / fadeDuration);
 			fadeProgress = fadeStartProgress + (fadeEndProgress - fadeStartProgress) * t;
-			
+
 			if (fadeElapsed >= fadeDuration) {
 				fadeProgress = fadeEndProgress;
 				isFading = false;
@@ -554,28 +577,28 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		debugBox.setVisible(false);
 
 		menuRoot.add(debugBox).expand().align(Align.topLeft);
-		
+
 		/* START MENU - Pokemon Emerald style (top-right) */
 		startMenuRoot = new Table();
 		startMenuRoot.setFillParent(true);
 		uiStage.addActor(startMenuRoot);
-		
+
 		startMenu = new StartMenu(skin);
 		startMenu.setVisible(false);
 		startMenuRoot.add(startMenu).expand().align(Align.topRight).pad(10f);
-		
+
 		/* PARTY DISPLAY - Pokemon party screen */
 		partyDisplayRoot = new Table();
 		partyDisplayRoot.setFillParent(true);
 		uiStage.addActor(partyDisplayRoot);
-		
+
 		// PartyDisplay is created when opened (needs trainer reference)
-		
+
 		/* BAG DISPLAY - Item inventory screen */
 		bagDisplayRoot = new Table();
 		bagDisplayRoot.setFillParent(true);
 		uiStage.addActor(bagDisplayRoot);
-		
+
 		// BagDisplay is created when opened (needs inventory reference)
 	}
 
@@ -660,6 +683,73 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		game.setScreen(battleScreen);
 	}
 
+	/**
+	 * Start a trainer battle with callback for persistence.
+	 * 
+	 * @param trainerId       Unique ID for the trainer (for save system)
+	 * @param opponentTrainer The opponent trainer
+	 */
+	public void startTrainerBattle(String trainerId, Trainer opponentTrainer) {
+		// Ensure opponent Pokemon have moves loaded
+		com.github.adisann.pokemon.battle.moves.MoveDatabase moveDb = game.getMoveDatabase();
+		for (int i = 0; i < opponentTrainer.getTeamSize(); i++) {
+			com.github.adisann.pokemon.model.Pokemon pkmn = opponentTrainer.getPokemon(i);
+			// If Pokemon has no moves, give it default moves
+			if (pkmn.getMove(0) == null) {
+				pkmn.setMove(0, moveDb.getMove("Tackle"));
+				pkmn.setMove(1, moveDb.getMove("Scratch"));
+			}
+		}
+
+		BattleScreen battleScreen = new BattleScreen();
+		battleScreen.init(game);
+		battleScreen.setTrainerBattleContext(playerTrainer, opponentTrainer, trainerId);
+		battleScreen.setInventory(playerInventory);
+		battleScreen.setBattleEndCallback((playerWon) -> {
+			if (playerWon) {
+				// Mark trainer as defeated in session memory (fallback)
+				markTrainerDefeated(trainerId);
+
+				// Mark trainer as defeated in save data
+				GameSaveData data = new GameSaveData(world.getName(), player.getX(), player.getY(),
+						player.getFacing().name());
+				data.team = playerTrainer.getTeam();
+				data.markDefeated(trainerId);
+				game.getSaveManager().saveGame(0, data);
+				System.out.println("[Trainer Battle] " + trainerId + " marked as defeated!");
+			}
+		});
+		game.setScreen(battleScreen);
+	}
+
+	/**
+	 * Get the player's trainer for NPC interaction.
+	 */
+	public Trainer getPlayerTrainer() {
+		return playerTrainer;
+	}
+
+	/**
+	 * Get the game's move database.
+	 */
+	public com.github.adisann.pokemon.battle.moves.MoveDatabase getMoveDatabase() {
+		return game.getMoveDatabase();
+	}
+
+	/**
+	 * Get the current save data for NPC state checking.
+	 * Returns null if no save exists or if loading fails.
+	 */
+	public com.github.adisann.pokemon.save.GameSaveData getSaveData() {
+		try {
+			return game.getSaveManager().quickLoad();
+		} catch (Exception e) {
+			// Save file corrupted or incompatible, treat as no save
+			System.out.println("[GameScreen] Warning: Could not load save data: " + e.getMessage());
+			return null;
+		}
+	}
+
 	@Override
 	public void showDialogue(String text) {
 		if (dialogueBox != null && text != null) {
@@ -677,7 +767,8 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 
 	@Override
 	public void startScreenFade(Color color, float startAlpha, float endAlpha, float duration) {
-		System.out.println("Starting Pokemon-style fade: " + startAlpha + " -> " + endAlpha + " over " + duration + "s");
+		System.out
+				.println("Starting Pokemon-style fade: " + startAlpha + " -> " + endAlpha + " over " + duration + "s");
 		// For shader-based fade, alpha values are treated as fade progress
 		// 0 = no fade (normal colors), 1 = full fade (all black)
 		this.fadeStartProgress = startAlpha;
@@ -687,9 +778,9 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		this.fadeElapsed = 0f;
 		this.isFading = true;
 	}
-	
+
 	/* ===== START MENU METHODS ===== */
-	
+
 	private void openStartMenu() {
 		startMenuOpen = true;
 		startMenu.setVisible(true);
@@ -699,12 +790,12 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 			playerController.clearAllInput();
 		}
 	}
-	
+
 	private void closeStartMenu() {
 		startMenuOpen = false;
 		startMenu.setVisible(false);
 	}
-	
+
 	private void handleStartMenuSelection() {
 		StartMenu.MenuOption selected = startMenu.getSelectedOption();
 		switch (selected) {
@@ -733,9 +824,9 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				break;
 		}
 	}
-	
+
 	/* ===== PARTY DISPLAY METHODS ===== */
-	
+
 	private void openPartyDisplay() {
 		partyDisplayOpen = true;
 		partyDisplayRoot.clearChildren();
@@ -743,16 +834,16 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		partyDisplayRoot.add(partyDisplay).expand().center();
 		partyDisplay.setVisible(true);
 	}
-	
+
 	private void closePartyDisplay() {
 		partyDisplayOpen = false;
 		if (partyDisplay != null) {
 			partyDisplay.setVisible(false);
 		}
 	}
-	
+
 	/* ===== BAG DISPLAY METHODS ===== */
-	
+
 	private void openBagDisplay() {
 		bagDisplayOpen = true;
 		bagDisplayRoot.clearChildren();
@@ -760,7 +851,7 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 		bagDisplayRoot.add(bagDisplay).expand().center();
 		bagDisplay.setVisible(true);
 	}
-	
+
 	private void closeBagDisplay() {
 		bagDisplayOpen = false;
 		if (bagDisplay != null) {

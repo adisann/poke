@@ -90,6 +90,7 @@ addObj			9	14	SIGN
 
 addObj			14	14	SIGN
 addObj			15	14	SMALL_HOUSE_MIRROR
+teleport		16	14	GRASS	may_house	3	0	NORTH	WHITE
 addDoor			16	14
 
 addObj			17	9	SIGN

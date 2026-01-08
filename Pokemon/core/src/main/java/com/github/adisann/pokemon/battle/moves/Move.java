@@ -11,7 +11,7 @@ import com.github.adisann.pokemon.model.Pokemon;
  * 
  * Do not make new instances of these!
  * Instead, use {@link #clone()}.
- * */
+ */
 public abstract class Move {
 
 	protected MoveSpecification spec;
@@ -24,7 +24,7 @@ public abstract class Move {
 
 	public int useMove(BattleMechanics mechanics, Pokemon user, Pokemon target, BATTLE_PARTY party,
 			BattleEventQueuer broadcaster) {
-		int damage = mechanics.calculateDamage(this, user, target);
+		int damage = mechanics.calculateDamage(this, user, target, party == BATTLE_PARTY.PLAYER);
 		target.applyDamage(damage);
 		return damage;
 	}

@@ -12,18 +12,27 @@ import com.github.adisann.pokemon.ui.OptionBox;
 
 /**
  * Controller for the game's dialogue system.
- * */
+ */
 public class DialogueController extends InputAdapter {
-	
+
 	private DialogueTraverser traverser;
 	private DialogueBox dialogueBox;
 	private OptionBox optionBox;
-	
+	private Runnable onDialogueEndCallback;
+
 	public DialogueController(DialogueBox box, OptionBox optionBox) {
 		this.dialogueBox = box;
 		this.optionBox = optionBox;
 	}
-	
+
+	/**
+	 * Set a callback to be called when dialogue ends.
+	 * Callback is cleared after being called.
+	 */
+	public void setOnDialogueEndCallback(Runnable callback) {
+		this.onDialogueEndCallback = callback;
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
 		if (dialogueBox.isVisible()) {
@@ -31,7 +40,7 @@ public class DialogueController extends InputAdapter {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean keyUp(int keycode) {
 		if (optionBox.isVisible()) {
@@ -48,21 +57,28 @@ public class DialogueController extends InputAdapter {
 		}
 		if (traverser != null && keycode == Keys.X) { // continue through tree
 			DialogueNode thisNode = traverser.getNode();
-			
-			if (thisNode instanceof LinearDialogueNode)  {
-				LinearDialogueNode node = (LinearDialogueNode)thisNode;
+
+			if (thisNode instanceof LinearDialogueNode) {
+				LinearDialogueNode node = (LinearDialogueNode) thisNode;
 				if (node.getPointers().isEmpty()) { // dead end, since no pointers
-					traverser = null;				// end dialogue
+					traverser = null; // end dialogue
 					dialogueBox.setVisible(false);
+
+					// Invoke callback if set
+					if (onDialogueEndCallback != null) {
+						Runnable callback = onDialogueEndCallback;
+						onDialogueEndCallback = null; // Clear to prevent re-trigger
+						callback.run();
+					}
 				} else {
 					progress(0); // progress through first pointer
 				}
 			}
-			if (thisNode instanceof ChoiceDialogueNode)  {
-				ChoiceDialogueNode node = (ChoiceDialogueNode)thisNode;
+			if (thisNode instanceof ChoiceDialogueNode) {
+				ChoiceDialogueNode node = (ChoiceDialogueNode) thisNode;
 				progress(optionBox.getIndex());
 			}
-			
+
 			return true;
 		}
 		if (dialogueBox.isVisible()) {
@@ -70,7 +86,7 @@ public class DialogueController extends InputAdapter {
 		}
 		return false;
 	}
-	
+
 	public void update(float delta) {
 		if (dialogueBox.isFinished() && traverser != null) {
 			DialogueNode nextNode = traverser.getNode();
@@ -79,18 +95,18 @@ public class DialogueController extends InputAdapter {
 			}
 		}
 	}
-	
+
 	public void startDialogue(Dialogue dialogue) {
 		traverser = new DialogueTraverser(dialogue);
 		dialogueBox.setVisible(true);
-		
+
 		DialogueNode nextNode = traverser.getNode();
 		if (nextNode instanceof LinearDialogueNode) {
-			LinearDialogueNode node = (LinearDialogueNode)nextNode;
+			LinearDialogueNode node = (LinearDialogueNode) nextNode;
 			dialogueBox.animateText(node.getText());
 		}
 		if (nextNode instanceof ChoiceDialogueNode) {
-			ChoiceDialogueNode node = (ChoiceDialogueNode)nextNode;
+			ChoiceDialogueNode node = (ChoiceDialogueNode) nextNode;
 			dialogueBox.animateText(node.getText());
 			optionBox.clear();
 			for (String s : node.getLabels()) {
@@ -98,17 +114,17 @@ public class DialogueController extends InputAdapter {
 			}
 		}
 	}
-	
+
 	private void progress(int index) {
 		optionBox.setVisible(false);
 		DialogueNode nextNode = traverser.getNextNode(index);
-		
+
 		if (nextNode instanceof LinearDialogueNode) {
-			LinearDialogueNode node = (LinearDialogueNode)nextNode;
+			LinearDialogueNode node = (LinearDialogueNode) nextNode;
 			dialogueBox.animateText(node.getText());
 		}
 		if (nextNode instanceof ChoiceDialogueNode) {
-			ChoiceDialogueNode node = (ChoiceDialogueNode)nextNode;
+			ChoiceDialogueNode node = (ChoiceDialogueNode) nextNode;
 			dialogueBox.animateText(node.getText());
 			optionBox.clearChoices();
 			for (String s : node.getLabels()) {
@@ -116,7 +132,7 @@ public class DialogueController extends InputAdapter {
 			}
 		}
 	}
-	
+
 	public boolean isDialogueShowing() {
 		return dialogueBox.isVisible();
 	}

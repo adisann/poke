@@ -24,6 +24,28 @@ public class GameSaveData {
     // public int money;
     // public List<String> badges;
 
+    // Defeated trainers for trainer battle persistence
+    public java.util.Set<String> defeatedTrainers = new java.util.HashSet<>();
+
+    /**
+     * Mark a trainer as defeated.
+     * 
+     * @param trainerId Unique identifier for the trainer (e.g., "may")
+     */
+    public void markDefeated(String trainerId) {
+        defeatedTrainers.add(trainerId);
+    }
+
+    /**
+     * Check if a trainer has been defeated.
+     * 
+     * @param trainerId Unique identifier for the trainer
+     * @return true if the trainer has been defeated
+     */
+    public boolean isDefeated(String trainerId) {
+        return defeatedTrainers.contains(trainerId);
+    }
+
     /**
      * Default constructor required for JSON deserialization.
      */

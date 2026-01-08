@@ -23,10 +23,14 @@ import com.github.adisann.pokemon.model.Tile;
 import com.github.adisann.pokemon.model.world.Door;
 import com.github.adisann.pokemon.model.world.World;
 import com.github.adisann.pokemon.model.world.WorldObject;
+import com.github.adisann.pokemon.model.actor.NPCActor;
+import com.github.adisann.pokemon.model.Pokemon;
+import com.github.adisann.pokemon.battle.Trainer;
+import com.github.adisann.pokemon.util.AnimationSet;
 
 /**
  * Small loader to load World.class into AssetManager.
- * */
+ */
 public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.WorldParameter> {
 
 	private World world;
@@ -96,6 +100,9 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 						break;
 					case "unwalkable":
 						unwalkable(tokens[1], tokens[2]);
+						break;
+					case "addNPC":
+						addNPC(asman, tokens[1], tokens[2], tokens[3], tokens[4]);
 						break;
 				}
 			}
@@ -209,18 +216,18 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 
 		// Pass tile coordinates (x, y) so TeleportTile can calculate movement direction
 		TeleportTile tile = new TeleportTile(t, x, y, stargetWorld, targetX, targetY, targetDir, transitionColor);
-		
+
 		// Add conditions based on destination (replaces hard-coded checks)
 		if (stargetWorld.equals("oldale_town")) {
 			tile.addCondition(new com.github.adisann.pokemon.model.portal.PartyNotFaintedCondition(
-				"Your Pokemon is fainted. You cannot enter Oldale."));
+					"Your Pokemon is fainted. You cannot enter Oldale."));
 		}
-		
+
 		// Add actions based on destination (replaces hard-coded actions)
 		if (stargetWorld.equals("test_map_indoor")) {
 			tile.addAction(new com.github.adisann.pokemon.model.portal.HealPartyAction());
 		}
-		
+
 		world.getMap().setTile(tile, x, y);
 	}
 
@@ -237,6 +244,93 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 		world.addObject(door);
 	}
 
+	/**
+	 * Add an NPC actor to the world.
+	 * Format: addNPC x y npcId facing
+	 * 
+	 * @param asman   Asset manager
+	 * @param sx      X coordinate
+	 * @param sy      Y coordinate
+	 * @param npcId   NPC identifier (e.g., "may")
+	 * @param sfacing Direction NPC faces (NORTH, SOUTH, EAST, WEST)
+	 */
+	private void addNPC(AssetManager asman, String sx, String sy, String npcId, String sfacing) {
+		int x = Integer.parseInt(sx);
+		int y = Integer.parseInt(sy);
+		com.github.adisann.pokemon.model.DIRECTION facing = com.github.adisann.pokemon.model.DIRECTION.valueOf(sfacing);
+
+		AnimationSet npcAnimations;
+
+		// Create NPC-specific animations
+		if (npcId.equals("may")) {
+			// Load May's overworld sprite from AssetManager (pre-loaded as dependency)
+			com.badlogic.gdx.graphics.Texture mayTexture = asman.get(
+					"graphics/trainers/train_may_overworld.png", com.badlogic.gdx.graphics.Texture.class);
+			TextureRegion mayRegion = new TextureRegion(mayTexture);
+
+			// Create single-frame animations (NPC stands still)
+			com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> staticAnim = new com.badlogic.gdx.graphics.g2d.Animation<>(
+					1f, mayRegion);
+
+			npcAnimations = new AnimationSet(
+					staticAnim, staticAnim, staticAnim, staticAnim, // walk animations (all same for now)
+					mayRegion, mayRegion, mayRegion, mayRegion); // stand sprites (all directions)
+		} else {
+			// Default: use Brendan sprites from atlas
+			TextureAtlas atlas = asman.get("graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
+			npcAnimations = new AnimationSet(
+					new com.badlogic.gdx.graphics.g2d.Animation<>(0.4f / 2f, atlas.findRegions("brendan_walk_north"),
+							com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP_PINGPONG),
+					new com.badlogic.gdx.graphics.g2d.Animation<>(0.4f / 2f, atlas.findRegions("brendan_walk_south"),
+							com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP_PINGPONG),
+					new com.badlogic.gdx.graphics.g2d.Animation<>(0.4f / 2f, atlas.findRegions("brendan_walk_east"),
+							com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP_PINGPONG),
+					new com.badlogic.gdx.graphics.g2d.Animation<>(0.4f / 2f, atlas.findRegions("brendan_walk_west"),
+							com.badlogic.gdx.graphics.g2d.Animation.PlayMode.LOOP_PINGPONG),
+					atlas.findRegion("brendan_stand_north"),
+					atlas.findRegion("brendan_stand_south"),
+					atlas.findRegion("brendan_stand_east"),
+					atlas.findRegion("brendan_stand_west"));
+		}
+
+		NPCActor npc = new NPCActor(world, x, y, npcAnimations);
+		npc.setId(npcId);
+		npc.refaceWithoutAnimation(facing);
+
+		// Configure NPC based on ID
+		if (npcId.equals("may")) {
+			npc.setDisplayName("May");
+			npc.setDialogueBeforeBattle("Hey there! I've been waiting for you. How about a Pokemon battle?");
+			npc.setDialogueAfterBattle("That was a great battle! You're really strong!");
+
+			// Create May's trainer with Torchic (using Charmander sprite as placeholder)
+			// Pokemon is created without moves - moves will be loaded at battle start
+			java.util.Map<com.github.adisann.pokemon.battle.STAT, Integer> torchicStats = new java.util.HashMap<>();
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.HITPOINTS, 45);
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.ATTACK, 60);
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.DEFENCE, 40);
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.SPECIAL_ATTACK, 70);
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.SPECIAL_DEFENCE, 50);
+			torchicStats.put(com.github.adisann.pokemon.battle.STAT.SPEED, 45);
+
+			java.util.List<com.github.adisann.pokemon.model.Type> torchicTypes = new java.util.ArrayList<>();
+			torchicTypes.add(com.github.adisann.pokemon.model.Type.FIRE);
+
+			com.github.adisann.pokemon.model.PokemonSpecies charmanderSpec = new com.github.adisann.pokemon.model.PokemonSpecies(
+					"Charmander", torchicStats, torchicTypes, 62, "graphics/pokemon/charmander.png");
+
+			Pokemon charmander = new Pokemon(charmanderSpec, 5);
+			Trainer mayTrainer = new Trainer(charmander);
+			mayTrainer.setSpriteName("graphics/trainers/trainer_may.png");
+			npc.setTrainer(mayTrainer);
+		}
+
+		world.addActor(npc);
+
+		// Set NPC on tile to block walking through
+		world.getMap().getTile(x, y).setActor(npc);
+	}
+
 	@Override
 	public World loadSync(AssetManager arg0, String arg1, FileHandle arg2, WorldParameter arg3) {
 		return world;
@@ -249,6 +343,11 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 		ad.add(new AssetDescriptor("graphics_packed/tiles/tilepack.atlas", TextureAtlas.class));
 		ad.add(new AssetDescriptor("LWorldObjects.xml", LWorldObjectDb.class));
 		ad.add(new AssetDescriptor("LTerrain.xml", LTerrainDb.class));
+		// NPC sprite dependencies
+		ad.add(new AssetDescriptor("graphics/trainers/train_may_overworld.png",
+				com.badlogic.gdx.graphics.Texture.class));
+		ad.add(new AssetDescriptor("graphics/trainers/trainer_may.png",
+				com.badlogic.gdx.graphics.Texture.class));
 		return ad;
 	}
 

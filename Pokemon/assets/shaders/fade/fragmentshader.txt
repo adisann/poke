@@ -1,0 +1,36 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+varying vec4 v_color;
+varying vec2 v_texCoords;
+
+uniform sampler2D u_texture;
+
+// Fade progress: 0.0 = no fade, 1.0 = fully faded to black
+uniform float u_fadeProgress;
+
+// Number of discrete steps (for authentic GBA look, use 4-8)
+uniform float u_fadeSteps;
+
+// Target fade color (usually black: 0,0,0)
+uniform vec3 u_fadeColor;
+
+void main() {
+    vec4 texColor = texture2D(u_texture, v_texCoords);
+    
+    // Skip transparent pixels
+    if (texColor.a == 0.0) {
+        discard;
+    }
+    
+    // Quantize the fade progress to discrete steps (GBA style)
+    // This creates the "stepped" look instead of smooth fade
+    float steppedProgress = floor(u_fadeProgress * u_fadeSteps) / u_fadeSteps;
+    
+    // Fade the RGB values toward the target color
+    // This is how GBA fades worked - colors shift toward black/white
+    vec3 fadedColor = mix(texColor.rgb, u_fadeColor, steppedProgress);
+    
+    gl_FragColor = vec4(fadedColor, texColor.a) * v_color;
+}

@@ -1,0 +1,14 @@
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
+
+dependencies {
+  api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  api 'com.github.arcnor:universal-tween-engine:6.3.4'
+  implementation "com.crashinvaders.lml:gdx-autumn-mvc:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-autumn:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-kiwi:$lmlVersion"
+  implementation "com.crashinvaders.lml:gdx-lml:$lmlVersion"
+
+  api "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+}

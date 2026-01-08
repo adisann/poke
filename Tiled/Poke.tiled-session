@@ -1,0 +1,137 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "littleroot_town_main.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "8x8 littletownroot.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Brendan Walking.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
+        },
+        "Font.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 3
+        },
+        "Game Boy Advance - Pokemon Emerald - Playable Characters - Brendan.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "brendan.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 3,
+            "scaleInEditor": 3
+        },
+        "font.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "lab_map.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 64.25,
+                "y": 195.25
+            }
+        },
+        "littleroot.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 2,
+            "scaleInEditor": 1.5
+        },
+        "littleroot_map.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 84,
+                "y": -15.75
+            }
+        },
+        "littleroot_tileset.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1.5
+        },
+        "littleroot_town_main.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 270.5,
+                "y": 260.5
+            }
+        },
+        "main.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 676,
+                "y": 563
+            }
+        },
+        "main_tileset.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 0.75
+        },
+        "outside_tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1.5
+        },
+        "rumah_ibu.tmx": {
+            "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 96.75,
+                "y": 139.75
+            }
+        },
+        "rumah_lab.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1.5
+        },
+        "tileset.tsx": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1.5
+        }
+    },
+    "last.imagePath": "C:/Users/wisnu/OneDrive/Documents/00_Kuliah/Semester 5/Pemrograman Berorientasi Objek/Tugas Besar (Pokemon)/Emerald Essentials/16 pixels essentials",
+    "map.height": 14,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 14,
+    "openFiles": [
+        "littleroot_town_main.tmx"
+    ],
+    "project": "Poke.tiled-project",
+    "recentFiles": [
+        "littleroot_town_main.tmx",
+        "main_tileset.tsx",
+        "brendan.tsx",
+        "rumah_lab.tsx",
+        "rumah_ibu.tmx",
+        "8x8 littletownroot.tsx",
+        "lab_map.tmx",
+        "Game Boy Advance - Pokemon Emerald - Playable Characters - Brendan.tsx",
+        "font.tsx",
+        "Font.tsx",
+        "littleroot_tileset.tsx",
+        "littleroot_map.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 0,
+    "tileset.spacing": 0,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

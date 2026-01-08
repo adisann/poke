@@ -1,0 +1,37 @@
+[
+    {
+        "id": "may",
+        "displayName": "May",
+        "sprite": "graphics/trainers/train_may_overworld.png",
+        "battleSprite": "graphics/trainers/trainer_may.png",
+        "isTrainer": true,
+        "isHealer": false,
+        "dialogueBefore": "Hey there! I've been waiting for you. How about a Pokemon battle?",
+        "dialogueAfter": "That was a great battle! You're really strong!",
+        "team": [
+            {
+                "species": "charmander",
+                "level": 5,
+                "moves": [
+                    "Scratch",
+                    "Ember"
+                ]
+            }
+        ],
+        "rewards": {
+            "money": 500
+        }
+    },
+    {
+        "id": "mom",
+        "displayName": "Mom",
+        "sprite": "graphics/npc/mom_hoen.png",
+        "battleSprite": null,
+        "isTrainer": false,
+        "isHealer": true,
+        "dialogueBefore": null,
+        "dialogueAfter": null,
+        "team": [],
+        "rewards": null
+    }
+]

@@ -223,10 +223,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 					"Your Pokemon is fainted. You cannot enter Oldale."));
 		}
 
-		// Add actions based on destination (replaces hard-coded actions)
-		if (stargetWorld.equals("test_map_indoor")) {
-			tile.addAction(new com.github.adisann.pokemon.model.portal.HealPartyAction());
-		}
+		// NOTE: Removed auto-heal for test_map_indoor - now handled by Mom NPC
+		// interaction
 
 		world.getMap().setTile(tile, x, y);
 	}
@@ -275,6 +273,19 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 			npcAnimations = new AnimationSet(
 					staticAnim, staticAnim, staticAnim, staticAnim, // walk animations (all same for now)
 					mayRegion, mayRegion, mayRegion, mayRegion); // stand sprites (all directions)
+		} else if (npcId.equals("mom")) {
+			// Load Mom's sprite
+			com.badlogic.gdx.graphics.Texture momTexture = asman.get(
+					"graphics/npc/mom_hoen.png", com.badlogic.gdx.graphics.Texture.class);
+			TextureRegion momRegion = new TextureRegion(momTexture);
+
+			// Create single-frame animations (NPC stands still)
+			com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> staticAnim = new com.badlogic.gdx.graphics.g2d.Animation<>(
+					1f, momRegion);
+
+			npcAnimations = new AnimationSet(
+					staticAnim, staticAnim, staticAnim, staticAnim,
+					momRegion, momRegion, momRegion, momRegion);
 		} else {
 			// Default: use Brendan sprites from atlas
 			TextureAtlas atlas = asman.get("graphics_packed/tiles/tilepack.atlas", TextureAtlas.class);
@@ -323,6 +334,9 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 			Trainer mayTrainer = new Trainer(charmander);
 			mayTrainer.setSpriteName("graphics/trainers/trainer_may.png");
 			npc.setTrainer(mayTrainer);
+		} else if (npcId.equals("mom")) {
+			npc.setDisplayName("Mom");
+			npc.setHealer(true); // Mark as healer NPC
 		}
 
 		world.addActor(npc);
@@ -347,6 +361,8 @@ public class WorldLoader extends AsynchronousAssetLoader<World, WorldLoader.Worl
 		ad.add(new AssetDescriptor("graphics/trainers/train_may_overworld.png",
 				com.badlogic.gdx.graphics.Texture.class));
 		ad.add(new AssetDescriptor("graphics/trainers/trainer_may.png",
+				com.badlogic.gdx.graphics.Texture.class));
+		ad.add(new AssetDescriptor("graphics/npc/mom_hoen.png",
 				com.badlogic.gdx.graphics.Texture.class));
 		return ad;
 	}

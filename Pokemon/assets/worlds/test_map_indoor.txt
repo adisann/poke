@@ -43,4 +43,6 @@ unwalkable		6	0
 
 addRug			2	0
 
+addNPC		3	3	mom	SOUTH
+
 teleport		3	0	NONE	littleroot_town	7	14	SOUTH	BLACK

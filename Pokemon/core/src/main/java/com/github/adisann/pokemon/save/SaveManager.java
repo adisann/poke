@@ -3,6 +3,7 @@ package com.github.adisann.pokemon.save;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Json;
+import com.github.adisann.pokemon.model.PokemonSpecies;
 import com.github.czyzby.autumn.annotation.Component;
 
 /**
@@ -33,6 +34,10 @@ public class SaveManager {
         // Initialize session tracking
         this.sessionStartTime = System.currentTimeMillis();
         this.previousPlaytime = 0;
+
+        // Register custom serializer for PokemonSpecies record (fixes no-arg
+        // constructor issue)
+        json.setSerializer(PokemonSpecies.class, new PokemonSpeciesJsonAdapter());
     }
 
     /**

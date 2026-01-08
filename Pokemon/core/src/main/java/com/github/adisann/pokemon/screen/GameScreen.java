@@ -150,7 +150,8 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 			return true;
 		}
 		GameSaveData data = getSaveData();
-		return data != null && data.isDefeated(trainerId);
+		boolean result = data != null && data.isDefeated(trainerId);
+		return result;
 	}
 
 	/**
@@ -241,6 +242,10 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 
 						// Reconstruct Trainer
 						if (data.team != null && !data.team.isEmpty()) {
+							// Reload moves for each Pokemon (moves are stored as names in save)
+							for (Pokemon p : data.team) {
+								p.reloadMoves(game.getMoveDatabase());
+							}
 							playerTrainer = new Trainer(data.team.get(0));
 							for (int i = 1; i < data.team.size(); i++) {
 								playerTrainer.addPokemon(data.team.get(i));
@@ -477,8 +482,17 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 
 			// Check inputs for Save/Load (quick save with F5)
 			if (Gdx.input.isKeyJustPressed(Keys.F5)) {
-				GameSaveData data = new GameSaveData(world.getName(), player.getX(), player.getY(),
-						player.getFacing().name());
+				// Load existing save to preserve defeatedTrainers
+				GameSaveData data = game.getSaveManager().loadGame(0);
+				if (data == null) {
+					data = new GameSaveData(world.getName(), player.getX(), player.getY(),
+							player.getFacing().name());
+				} else {
+					data.worldName = world.getName();
+					data.playerX = player.getX();
+					data.playerY = player.getY();
+					data.playerFacing = player.getFacing().name();
+				}
 				data.team = playerTrainer.getTeam();
 				game.getSaveManager().saveGame(0, data);
 				// TODO: Show 'Game Saved' message
@@ -710,13 +724,27 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				// Mark trainer as defeated in session memory (fallback)
 				markTrainerDefeated(trainerId);
 
-				// Mark trainer as defeated in save data
-				GameSaveData data = new GameSaveData(world.getName(), player.getX(), player.getY(),
-						player.getFacing().name());
+				// Load existing save data to preserve previous state (including previously
+				// defeated trainers)
+				GameSaveData data = game.getSaveManager().loadGame(0);
+				if (data == null) {
+					// No existing save - create new one
+					data = new GameSaveData(world.getName(), player.getX(), player.getY(),
+							player.getFacing().name());
+				} else {
+					// Update position in existing save
+					data.worldName = world.getName();
+					data.playerX = player.getX();
+					data.playerY = player.getY();
+					data.playerFacing = player.getFacing().name();
+				}
+
+				// Update team and mark trainer as defeated
 				data.team = playerTrainer.getTeam();
 				data.markDefeated(trainerId);
 				game.getSaveManager().saveGame(0, data);
-				System.out.println("[Trainer Battle] " + trainerId + " marked as defeated!");
+				System.out.println("[Trainer Battle] " + trainerId + " marked as defeated! Total defeated: "
+						+ data.defeatedTrainers.size());
 			}
 		});
 		game.setScreen(battleScreen);
@@ -808,9 +836,17 @@ public class GameScreen implements AbstractScreen, CutscenePlayer, ScreenFadeEve
 				openBagDisplay();
 				break;
 			case SAVE:
-				// Save game
-				GameSaveData data = new GameSaveData(world.getName(), player.getX(), player.getY(),
-						player.getFacing().name());
+				// Save game - load existing to preserve defeatedTrainers
+				GameSaveData data = game.getSaveManager().loadGame(0);
+				if (data == null) {
+					data = new GameSaveData(world.getName(), player.getX(), player.getY(),
+							player.getFacing().name());
+				} else {
+					data.worldName = world.getName();
+					data.playerX = player.getX();
+					data.playerY = player.getY();
+					data.playerFacing = player.getFacing().name();
+				}
 				data.team = playerTrainer.getTeam();
 				game.getSaveManager().saveGame(0, data);
 				closeStartMenu();

@@ -15,6 +15,7 @@ public class GameSaveData {
     public String playerFacing;
 
     // Game progress
+    public int version = 1; // Save format version for migration support
     public long playtimeSeconds;
     public long saveTimestamp;
 
@@ -33,7 +34,12 @@ public class GameSaveData {
      * @param trainerId Unique identifier for the trainer (e.g., "may")
      */
     public void markDefeated(String trainerId) {
+        // Ensure defeatedTrainers is initialized (for old saves that may have null)
+        if (defeatedTrainers == null) {
+            defeatedTrainers = new java.util.HashSet<>();
+        }
         defeatedTrainers.add(trainerId);
+        System.out.println("[GameSaveData] Marked " + trainerId + " as defeated. Total: " + defeatedTrainers);
     }
 
     /**
@@ -43,7 +49,13 @@ public class GameSaveData {
      * @return true if the trainer has been defeated
      */
     public boolean isDefeated(String trainerId) {
-        return defeatedTrainers.contains(trainerId);
+        if (defeatedTrainers == null) {
+            return false;
+        }
+        boolean defeated = defeatedTrainers.contains(trainerId);
+        System.out.println(
+                "[GameSaveData] isDefeated(" + trainerId + ") = " + defeated + " (list: " + defeatedTrainers + ")");
+        return defeated;
     }
 
     /**

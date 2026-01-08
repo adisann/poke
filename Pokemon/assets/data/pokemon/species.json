@@ -1,0 +1,122 @@
+[
+  {
+    "id": "bulbasaur",
+    "name": "Bulbasaur",
+    "types": ["GRASS", "POISON"],
+    "baseStats": {
+      "HITPOINTS": 45,
+      "ATTACK": 49,
+      "DEFENCE": 49,
+      "SPECIAL_ATTACK": 65,
+      "SPECIAL_DEFENCE": 65,
+      "SPEED": 45
+    },
+    "baseExp": 64,
+    "spriteName": "graphics/pokemon/bulbasaur.png",
+    "learnset": [
+      {"move": "Tackle", "level": 1},
+      {"move": "Vine Whip", "level": 7}
+    ],
+    "catchRate": 45
+  },
+  {
+    "id": "charmander",
+    "name": "Charmander",
+    "types": ["FIRE"],
+    "baseStats": {
+      "HITPOINTS": 39,
+      "ATTACK": 52,
+      "DEFENCE": 43,
+      "SPECIAL_ATTACK": 60,
+      "SPECIAL_DEFENCE": 50,
+      "SPEED": 65
+    },
+    "baseExp": 62,
+    "spriteName": "graphics/pokemon/charmander.png",
+    "learnset": [
+      {"move": "Scratch", "level": 1},
+      {"move": "Ember", "level": 7}
+    ],
+    "catchRate": 45
+  },
+  {
+    "id": "squirtle",
+    "name": "Squirtle",
+    "types": ["WATER"],
+    "baseStats": {
+      "HITPOINTS": 44,
+      "ATTACK": 48,
+      "DEFENCE": 65,
+      "SPECIAL_ATTACK": 50,
+      "SPECIAL_DEFENCE": 64,
+      "SPEED": 43
+    },
+    "baseExp": 63,
+    "spriteName": "graphics/pokemon/squirtle.png",
+    "learnset": [
+      {"move": "Tackle", "level": 1},
+      {"move": "Water Gun", "level": 7},
+      {"move": "Bubble", "level": 10}
+    ],
+    "catchRate": 45
+  },
+  {
+    "id": "pidgey",
+    "name": "Pidgey",
+    "types": ["NORMAL", "FLYING"],
+    "baseStats": {
+      "HITPOINTS": 40,
+      "ATTACK": 45,
+      "DEFENCE": 40,
+      "SPECIAL_ATTACK": 35,
+      "SPECIAL_DEFENCE": 35,
+      "SPEED": 56
+    },
+    "baseExp": 50,
+    "spriteName": "graphics/pokemon/pidgey.png",
+    "learnset": [
+      {"move": "Tackle", "level": 1},
+      {"move": "Quick Attack", "level": 9}
+    ],
+    "catchRate": 255
+  },
+  {
+    "id": "slowpoke",
+    "name": "Slowpoke",
+    "types": ["WATER", "PSYCHIC"],
+    "baseStats": {
+      "HITPOINTS": 90,
+      "ATTACK": 65,
+      "DEFENCE": 65,
+      "SPECIAL_ATTACK": 40,
+      "SPECIAL_DEFENCE": 40,
+      "SPEED": 15
+    },
+    "baseExp": 63,
+    "spriteName": "graphics/pokemon/slowpoke.png",
+    "learnset": [
+      {"move": "Tackle", "level": 1},
+      {"move": "Water Gun", "level": 6}
+    ],
+    "catchRate": 190
+  },
+  {
+    "id": "missingno",
+    "name": "MissingNo.",
+    "types": ["NORMAL"],
+    "baseStats": {
+      "HITPOINTS": 33,
+      "ATTACK": 136,
+      "DEFENCE": 0,
+      "SPECIAL_ATTACK": 6,
+      "SPECIAL_DEFENCE": 6,
+      "SPEED": 29
+    },
+    "baseExp": 0,
+    "spriteName": "graphics/pokemon/bulbasaur.png",
+    "learnset": [
+      {"move": "Tackle", "level": 1}
+    ],
+    "catchRate": 0
+  }
+]

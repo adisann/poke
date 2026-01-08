@@ -6,6 +6,15 @@ This is a LibGDX-based Pokemon game clone.
 ## Requirements
 - Java 17 or higher (Eclipse Adoptium / Temurin recommended)
 
+## Download & Play (Google Drive)
+**[CLICK HERE TO DOWNLOAD GAME ANDROID/PC](https://drive.google.com/file/d/1fo_iGFcqVZ5bFS-BM8wSP_7EQUYcL7ZI/view?usp=sharing)**
+
+Cara install & main:
+1. Download file `pokemon-1.0.0.jar` dari link di atas.
+2. Pastikan Java 17 sudah terinstall.
+3. Double click file `.jar` nya.
+4. Enjoy!
+
 ## How to Run
 
 ### Method 1: Using the Runnable JAR

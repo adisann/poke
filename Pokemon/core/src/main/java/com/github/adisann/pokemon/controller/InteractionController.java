@@ -99,6 +99,21 @@ public class InteractionController extends InputAdapter {
 							if (text == null)
 								text = "...";
 							dialogue.addNode(new LinearDialogueNode(text, 0));
+						} else if (npc.isHealer()) {
+							// Healer NPC - show Yes/No healing choice
+							GameSaveData saveData = gameScreen != null ? gameScreen.getSaveData() : null;
+							dialogue = npc.getInteractionDialogue(saveData);
+
+							// Set callback to heal party ONLY if player chose "Yes" (ends on node 1)
+							if (gameScreen != null) {
+								dialogueController.setOnDialogueEndCallback(() -> {
+									// Check which choice was made: node 1 = Yes, node 2 = No
+									if (dialogueController.getLastNodeId() == 1) {
+										gameScreen.healPlayerTeam();
+										System.out.println("[InteractionController] Healed player's team via Mom NPC.");
+									}
+								});
+							}
 						} else {
 							// Use standard method for non-trainers
 							GameSaveData saveData = gameScreen != null ? gameScreen.getSaveData() : null;

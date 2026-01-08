@@ -297,6 +297,7 @@ public class BattleScreen implements AbstractScreen, BattleEventPlayer {
 					// Invoke callback for trainer battle persistence
 					if (battleEndCallback != null) {
 						battleEndCallback.onBattleEnd(true);
+						battleEndCallback = null; // Prevent duplicate calls
 					}
 					app.setScreen(app.getGameScreen());
 				} else if (battle.getState() == STATE.LOSE) {

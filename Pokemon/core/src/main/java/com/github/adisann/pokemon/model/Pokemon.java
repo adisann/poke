@@ -191,51 +191,80 @@ public class Pokemon implements Json.Serializable {
 	public List<String> getLearnableMovesAtLevel(int targetLevel) {
 		String name = species.name();
 		List<String> moves = new ArrayList<>();
-		
+
 		// Bulbasaur learnset (GRASS/NORMAL moves only)
 		if (name.contains("Bulba")) {
 			switch (targetLevel) {
-				case 1: moves.add("Tackle"); break;
-				case 9: moves.add("Vine Whip"); break;
+				case 1:
+					moves.add("Tackle");
+					break;
+				case 9:
+					moves.add("Vine Whip");
+					break;
 			}
 		}
 		// Charmander learnset (FIRE/NORMAL moves only)
 		else if (name.contains("Char")) {
 			switch (targetLevel) {
-				case 1: moves.add("Scratch"); break;
-				case 7: moves.add("Ember"); break;
-				case 13: moves.add("Rage"); break;
-				case 19: moves.add("Slash"); break;
+				case 1:
+					moves.add("Scratch");
+					break;
+				case 7:
+					moves.add("Ember");
+					break;
+				case 13:
+					moves.add("Rage");
+					break;
+				case 19:
+					moves.add("Slash");
+					break;
 			}
 		}
 		// Squirtle learnset (WATER/NORMAL moves only)
 		else if (name.contains("Squirt")) {
 			switch (targetLevel) {
-				case 1: moves.add("Tackle"); break;
-				case 7: moves.add("Bubble"); break;
-				case 10: moves.add("Water Gun"); break;
+				case 1:
+					moves.add("Tackle");
+					break;
+				case 7:
+					moves.add("Bubble");
+					break;
+				case 10:
+					moves.add("Water Gun");
+					break;
 			}
 		}
 		// Pidgey learnset (NORMAL moves only - no FLYING implemented)
 		else if (name.contains("Pidg")) {
 			switch (targetLevel) {
-				case 1: moves.add("Tackle"); break;
-				case 9: moves.add("Quick Attack"); break;
+				case 1:
+					moves.add("Tackle");
+					break;
+				case 9:
+					moves.add("Quick Attack");
+					break;
 			}
 		}
 		// Slowpoke learnset (WATER/NORMAL moves only)
 		else if (name.contains("Slow")) {
 			switch (targetLevel) {
-				case 1: moves.add("Tackle"); break;
-				case 6: moves.add("Water Gun"); break;
-				case 15: moves.add("Headbutt"); break;
+				case 1:
+					moves.add("Tackle");
+					break;
+				case 6:
+					moves.add("Water Gun");
+					break;
+				case 15:
+					moves.add("Headbutt");
+					break;
 			}
 		}
 		// Default - generic Pokemon
 		else {
-			if (targetLevel == 1) moves.add("Tackle");
+			if (targetLevel == 1)
+				moves.add("Tackle");
 		}
-		
+
 		return moves;
 	}
 
@@ -244,7 +273,8 @@ public class Pokemon implements Json.Serializable {
 	 */
 	public boolean hasEmptyMoveSlot() {
 		for (Move m : moves) {
-			if (m == null) return true;
+			if (m == null)
+				return true;
 		}
 		return false;
 	}
@@ -346,7 +376,7 @@ public class Pokemon implements Json.Serializable {
 
 		Pokemon generated = new Pokemon(spec, 5); // Level 5
 		generated.setMove(0, moveDatabase.getMove("Tackle"));
-		
+
 		// Assign type-appropriate second move
 		if (types.contains(Type.WATER)) {
 			generated.setMove(1, moveDatabase.getMove("Water Gun"));
@@ -362,13 +392,53 @@ public class Pokemon implements Json.Serializable {
 	}
 
 	public void reloadMoves(MoveDatabase db) {
-		if (moveNamesForReload != null) {
+		System.out.println("[Pokemon] reloadMoves called for " + (species != null ? species.name() : "null species"));
+		System.out.println("[Pokemon] moveNamesForReload = " + moveNamesForReload);
+
+		boolean loadedAnyMove = false;
+
+		if (moveNamesForReload != null && !moveNamesForReload.isEmpty()) {
 			for (int i = 0; i < moveNamesForReload.size(); i++) {
 				if (i < 4 && moveNamesForReload.get(i) != null) {
-					moves[i] = db.getMove(moveNamesForReload.get(i));
+					String moveName = String.valueOf(moveNamesForReload.get(i));
+					System.out.println("[Pokemon] Loading move " + i + ": " + moveName);
+					try {
+						moves[i] = db.getMove(moveName);
+						if (moves[i] != null) {
+							loadedAnyMove = true;
+						}
+						System.out
+								.println("[Pokemon] Move loaded: " + (moves[i] != null ? moves[i].getName() : "null"));
+					} catch (Exception e) {
+						System.err.println("[Pokemon] Failed to load move: " + moveName + " - " + e.getMessage());
+					}
 				}
 			}
 			moveNamesForReload = null;
+		}
+
+		// Fallback: If no moves loaded, assign default moves
+		if (!loadedAnyMove) {
+			System.out.println("[Pokemon] No moves loaded - assigning default Tackle");
+			moves[0] = db.getMove("Tackle");
+			// Add type-specific move based on first type
+			if (species != null && species.types() != null && !species.types().isEmpty()) {
+				Type primaryType = species.types().get(0);
+				switch (primaryType) {
+					case FIRE:
+						moves[1] = db.getMove("Ember");
+						break;
+					case WATER:
+						moves[1] = db.getMove("Water Gun");
+						break;
+					case GRASS:
+						moves[1] = db.getMove("Vine Whip");
+						break;
+					default:
+						moves[1] = db.getMove("Scratch");
+						break;
+				}
+			}
 		}
 	}
 

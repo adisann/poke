@@ -19,6 +19,7 @@ public class DialogueController extends InputAdapter {
 	private DialogueBox dialogueBox;
 	private OptionBox optionBox;
 	private Runnable onDialogueEndCallback;
+	private int lastNodeId = -1; // Track which node dialogue ended on
 
 	public DialogueController(DialogueBox box, OptionBox optionBox) {
 		this.dialogueBox = box;
@@ -31,6 +32,14 @@ public class DialogueController extends InputAdapter {
 	 */
 	public void setOnDialogueEndCallback(Runnable callback) {
 		this.onDialogueEndCallback = callback;
+	}
+
+	/**
+	 * Get the last node ID that the dialogue ended on.
+	 * Useful for checking which choice was made.
+	 */
+	public int getLastNodeId() {
+		return lastNodeId;
 	}
 
 	@Override
@@ -61,6 +70,7 @@ public class DialogueController extends InputAdapter {
 			if (thisNode instanceof LinearDialogueNode) {
 				LinearDialogueNode node = (LinearDialogueNode) thisNode;
 				if (node.getPointers().isEmpty()) { // dead end, since no pointers
+					lastNodeId = node.getID(); // Track which node we ended on
 					traverser = null; // end dialogue
 					dialogueBox.setVisible(false);
 
@@ -108,7 +118,7 @@ public class DialogueController extends InputAdapter {
 		if (nextNode instanceof ChoiceDialogueNode) {
 			ChoiceDialogueNode node = (ChoiceDialogueNode) nextNode;
 			dialogueBox.animateText(node.getText());
-			optionBox.clear();
+			optionBox.clearChoices();
 			for (String s : node.getLabels()) {
 				optionBox.addOption(s);
 			}

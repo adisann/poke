@@ -1,6 +1,7 @@
 package com.github.adisann.pokemon.model.actor;
 
 import com.github.adisann.pokemon.battle.Trainer;
+import com.github.adisann.pokemon.dialogue.ChoiceDialogueNode;
 import com.github.adisann.pokemon.dialogue.Dialogue;
 import com.github.adisann.pokemon.dialogue.LinearDialogueNode;
 import com.github.adisann.pokemon.model.DIRECTION;
@@ -19,6 +20,7 @@ public class NPCActor extends Actor {
 
     private String dialogueBeforeBattle;
     private String dialogueAfterBattle;
+    private boolean isHealer; // For healing NPCs like Mom
 
     /**
      * Create an NPC actor.
@@ -104,6 +106,20 @@ public class NPCActor extends Actor {
     }
 
     /**
+     * Set whether this NPC is a healer (like Mom).
+     */
+    public void setHealer(boolean healer) {
+        this.isHealer = healer;
+    }
+
+    /**
+     * Check if this NPC is a healer.
+     */
+    public boolean isHealer() {
+        return isHealer;
+    }
+
+    /**
      * Get appropriate dialogue based on defeated status.
      * 
      * @param saveData Save data to check defeated status
@@ -111,6 +127,24 @@ public class NPCActor extends Actor {
      */
     public Dialogue getInteractionDialogue(GameSaveData saveData) {
         Dialogue d = new Dialogue();
+
+        // Healer NPC - show Yes/No healing choice
+        if (isHealer) {
+            // Node 0: Ask to heal with choices
+            ChoiceDialogueNode choiceNode = new ChoiceDialogueNode(
+                    "Welcome home! Should I heal your Pokemon?", 0);
+            choiceNode.addChoice("Yes", 1); // Yes -> node 1
+            choiceNode.addChoice("No", 2); // No -> node 2
+            d.addNode(choiceNode);
+
+            // Node 1: Yes response (healing will be triggered by callback)
+            d.addNode(new LinearDialogueNode("Your Pokemon are healed!", 1));
+
+            // Node 2: No response
+            d.addNode(new LinearDialogueNode("Okay, take care!", 2));
+
+            return d;
+        }
 
         if (saveData != null && saveData.isDefeated(this.id)) {
             // Already defeated - show after battle dialogue
